@@ -1,5 +1,6 @@
 .venv
 ui
-backend
 Loyverse
+backend/server.py
+
 
