@@ -12,6 +12,7 @@ CREATE SCHEMA IF NOT EXISTS management;
 		category varchar(30),
         g_name varchar(50) NOT NULL,
 		b_name varchar(50),
+		uom varchar(50),
 		order_qty INT,
 		cost DECIMAL(10,2),
 		total_cost DECIMAL(10,2),
