@@ -1,6 +1,4 @@
 .venv
 ui
 Loyverse
-backend/server.py
-
-
+backend/__pycache__
