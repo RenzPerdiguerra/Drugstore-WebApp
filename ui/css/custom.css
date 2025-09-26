@@ -1,0 +1,63 @@
+header {
+  padding: 10px;
+  text-align: center;
+  font-size: 27px;
+  height: 60px;
+  background-color: yellow;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightcyan ;
+}
+
+.sidebar {
+  position: absolute;
+  left: 0px; 
+  top: 200px;
+  width: 34vh;
+  height: 45vh;
+  background-color: skyblue; /*  */
+  padding: 12px;
+  border: 1px solid black;
+  margin: 0px;
+  justify-content: center;
+}
+
+.sidebar-header {
+  padding: 0px;
+  margin-left: 7px;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding-top: 0px;
+  padding-left: 8px;
+}
+
+.sidebar-menu li{
+  padding: 2px;
+  padding-left: 10px;
+  font-size: large;
+  border: 1px solid black;
+}
+
+.container {
+  position: relative;
+  margin-left: 37vh;
+}
+
+/*   Applied BS, search contents
+container {} - login
+container-fluid{} - index
+
+/*   Other useful tools
+Z-index - third axis
+
+/*   Apply after 
+.custom-element {
+  color: color-yiq(#000); /*color orange: #fff` 
+}
+.custom-element {
+  color: color-yiq(theme-color("dark")); // returns `color: #fff`
+}
