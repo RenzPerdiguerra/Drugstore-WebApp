@@ -6,21 +6,41 @@ header {
   background-color: yellow;
 }
 
+button[class="insert-btn btn-danger btn-sm"] {
+  position: fixed;
+  right: 10px;
+  background-color: #32CD32;
+  color: whitesmoke;
+  padding: 6px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 4px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+  height: 400px;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: lightcyan ;
+    background-color: white ;
 }
 
 .sidebar {
-  position: absolute;
+  position: relative;
   left: 0px; 
-  top: 200px;
+  top: 3px;
   width: 34vh;
   height: 45vh;
-  background-color: skyblue; /*  */
+  background-color: rgb(from black r g b); /*  */
+  color: white;
   padding: 12px;
   border: 1px solid black;
-  margin: 0px;
   justify-content: center;
 }
 
@@ -43,8 +63,100 @@ body {
 }
 
 .container {
-  position: relative;
-  margin-left: 37vh;
+  position: fixed;
+  top: 10vh;
+  left: 37vh;
+  z-index: 0;
+}
+
+.insertProductTrigger {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #3c9e53;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.hidden {
+  display: none !important;
+}
+
+#modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* grayscale effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#modalContent {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+#productForm {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+#productForm-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-row label {
+  flex: 0 0 150px; /* fixed width for label */
+  font-weight: bold;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#saveProductBtn,
+#closeModalBtn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save {
+    margin-left: 150px;
+}
+
+.cancel {
+  margin-left: 30px;
+  background-color: #dc3545 !important; /* Red color for cancel button */
+  margin-left: 10px; /* Space between buttons */
 }
 
 /*   Applied BS, search contents
