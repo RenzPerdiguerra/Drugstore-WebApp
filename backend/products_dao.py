@@ -16,7 +16,7 @@ def get_products(conn):
             'd_exp': d_exp,
             'price': price,
             'cost': cost,
-            'stocl': stock,
+            'stock': stock,
             'stock_status': stock_status,
             'created_at': created_at
         })
@@ -25,37 +25,42 @@ def get_products(conn):
     return response
 
 def insert_product(conn, products):
+    cur = conn.cursor()
     data = (products['category'],products['g_name'], products['b_name'],
             products['d_arrived'], products['d_exp'], products['price'], products['cost'],
             products['stock'], products['stock_status'])
-    cur = conn.cursor()
-    query = ("INSERT INTO products "
+    query = ("INSERT INTO management.products "
              "(category, g_name, b_name, d_arrived, d_exp, price, cost, stock, stock_status)"
-             "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+             "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+             "RETURNING prod_id")
     cur.execute(query, data)
+    prod_id = cur.fetchone()[0]
     
     conn.commit()
-    conn.close()
-    return cur
+    cur.close()
+    return prod_id
 
 def delete_product(conn, prod_id):
     cur = conn.cursor()
-    query = "DELETE FROM products WHERE prod_id = " + str(prod_id)
-    cur.execute(query, prod_id)
+    query = "DELETE FROM management.products WHERE prod_id = %s RETURNING prod_id"
+    cur.execute(query, (prod_id,))
+    deleted_id = cur.fetchone()
     
     conn.commit()
-    conn.close()
-    return cur
+    cur.close()
+    return deleted_id[0] if deleted_id else None
 
+
+# UNIT TEST
 if __name__ == '__main__':
     conn = get_sql_connection()
     for x in get_products(conn):
         print(x)
-
+    
 '''
     print(delete_product(conn, 1))
-
-    print(inset_product(conn, {
+    
+    print(insert_product(conn, {
             'category': 'Generic',
             'g_name': 'Para+Guia+PPA+Dextro+Chlor',
             'b_name': 'Mucotoss Forte Capsule',
