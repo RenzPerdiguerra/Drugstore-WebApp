@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel='stylesheet' type="text/css" href="bootstrap.css">
-    <link rel='stylesheet' type="text/css" href="custom.css">
+    <link rel='stylesheet' type="text/css" href="css/bootstrap.css">
+    <link rel='stylesheet' type="text/css" href="css/custom.css">
 </head>
 <header>
-    <span class="header-name">MelPharma</span>
+    <span class="header-name">MelPharma</span>  
+    <button id="insertProductTrigger" class="insert-btn btn-danger btn-sm">Insert Product</button>
 </header>
-<body>
+<body class="scroll-y">
     <div class='sidebar'>
         <div class="sidebar-header">
             <h3>Manage Here</h3>
@@ -23,6 +24,8 @@
         </div>
     </div>
     <div class="container">
+        <div class="right content-page"></div>
+        <div class="box-info full" id="taskFormContainer"></div>
         <div class="table"></div>
             <div class='table-header'>
                 <h4>Manage Products</h4>
@@ -43,11 +46,19 @@
                         </thead>
                         <tbody>
 
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>    
-    </div>   
+    </div>
+    <!-- Modal container -->
+    <div id="modalOverlay" class="hidden">
+        <div id="modalContent"></div>
+    </div>
+<script src="js/jquery.js"></script>
+<script src="js/common.js"></script>
+<script src="js/manage-p.js"></script>
 </body>
 </html>
