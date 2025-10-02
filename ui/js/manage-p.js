@@ -37,7 +37,7 @@ $(function () {
         console.error("API request failed: ", status, error);
         $("table").find("tbody").html('<tr><td colspan="11">Failed to load products. Please try again later.</td></tr>');
     }); 
-});
+}); 
 
 // I need a form to collect data from the user
 // When the user clicks the save button, collect the data from the form and send it to the API endpoint

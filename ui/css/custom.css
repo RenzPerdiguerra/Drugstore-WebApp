@@ -63,7 +63,7 @@ body {
 }
 
 .container {
-  position: fixed;
+  position: absolute;
   top: 10vh;
   left: 37vh;
   z-index: 0;
