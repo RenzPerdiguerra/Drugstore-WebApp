@@ -32,9 +32,9 @@ body {
 }
 
 .sidebar {
-  position: relative;
+  position: fixed;
   left: 0px; 
-  top: 3px;
+  top: 70px;
   width: 34vh;
   height: 45vh;
   background-color: rgb(from black r g b); /*  */
@@ -64,9 +64,9 @@ body {
 
 .container {
   position: absolute;
-  top: 10vh;
+  top: 8vh;
   left: 37vh;
-  z-index: 0;
+  background-color: aliceblue;
 }
 
 .insertProductTrigger {
