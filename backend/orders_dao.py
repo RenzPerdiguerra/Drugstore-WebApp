@@ -28,7 +28,7 @@ def insert_order(conn, orders):
     data= (orders['category'], orders['g_name'], orders['b_name'], orders['uom'],
            orders['order_qty'], orders['cost'], orders['total_cost'], orders['d_exp'])
     query = ("INSERT INTO management.orders "
-            "(category, g_name, b_name, uom, order_qty, cost, total_cost, d_exp, d_oforder)"
+            "(category, g_name, b_name, uom, order_qty, cost, total_cost, d_exp)"
             "VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
             "RETURNING order_id")
     cur.execute(query, data)
@@ -51,7 +51,23 @@ def delete_order(conn, order_id):
 
 # UNIT TEST
 if __name__ == '__main__':
-    conn = get_sql_connection()
+    conn = get_sql_connection()    
+    delete_order(conn, 6)
+     
+'''
     for x in get_orders(conn):
         print(x)
+    
+    insert_order(conn, {
+    'category':'Generic',
+    'g_name': 'Felodipine',
+    'b_name':'Neophel', 
+    'uom': 'piece',
+    'order_qty':50,
+    'cost':13.75,
+    'total_cost':68750,
+    'd_exp':'2028/10/12' 
+    })
+
+'''
     

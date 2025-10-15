@@ -14,7 +14,7 @@ def get_uom(conn):
 
     cur.close()
     return response
-
+'''
 def insert_uom(conn, uom):
     cur = conn.cursor()
     data= (uom['unit'])
@@ -23,6 +23,19 @@ def insert_uom(conn, uom):
             "VALUES(%s)"
             "RETURNING uom_id")
     cur.execute(query, data)
+    uom_id = cur.fetchone()[0]
+    
+    conn.commit()
+    cur.close()
+    return uom_id
+'''
+def insert_uom(conn, unit):
+    cur = conn.cursor()
+    query = ("INSERT INTO management.uom "
+            "(unit)"
+            "VALUES(%s)"
+            "RETURNING uom_id")
+    cur.execute(query, (unit,))
     uom_id = cur.fetchone()[0]
     
     conn.commit()
@@ -43,6 +56,13 @@ def delete_uom(conn, uom_id):
 # UNIT TEST
 if __name__ == '__main__':
     conn = get_sql_connection()
+
+'''
     for x in get_uom(conn):
-        print(x)
+    print(x)
     
+    insert_uom(conn, 'box')
+    
+    delete_uom(conn, 5)
+
+'''
