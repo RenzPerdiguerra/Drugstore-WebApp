@@ -1,9 +1,13 @@
 header {
-  padding: 10px;
+  position: fixed;
+  width: 100%;
+  display: block;
+  background-color: yellow;
   text-align: center;
   font-size: 27px;
+  padding: 10px;
   height: 60px;
-  background-color: yellow;
+  z-index: 1000;
 }
 
 button[class="insert-btn btn-danger btn-sm"] {
@@ -34,8 +38,8 @@ body {
 .sidebar {
   position: fixed;
   left: 0px; 
-  top: 70px;
-  width: 34vh;
+  top: 7vh;
+  width: 27vh;
   height: 45vh;
   background-color: rgb(from black r g b); /*  */
   color: white;
@@ -65,7 +69,7 @@ body {
 .container {
   position: absolute;
   top: 8vh;
-  left: 37vh;
+  left: 30vh;
   background-color: aliceblue;
 }
 
@@ -78,6 +82,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .hidden {
   display: none !important;
 }
