@@ -2,4 +2,6 @@
 Loyverse
 backend/__pycache__
 backend/unitTest_dao.py
+backend/uom_dao.py
+ui/js/saveProductBtn.js
 ui

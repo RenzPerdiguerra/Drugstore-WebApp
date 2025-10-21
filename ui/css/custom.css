@@ -6,8 +6,15 @@ header {
   text-align: center;
   font-size: 27px;
   padding: 10px;
-  height: 60px;
+  height: 88px;
   z-index: 1000;
+}
+
+header > .header-name{
+  flex:content;
+  justify-content: center;
+  position: fixed;
+  font-size:xx-large;
 }
 
 button[class="insert-btn btn-danger btn-sm"] {
@@ -25,10 +32,21 @@ button[class="insert-btn btn-danger btn-sm"] {
   border-radius: 6px;
 }
 
+header .header-searchbar {
+  position: fixed;
+  right: 0px;
+  top: 50px;
+  margin: 4px;
+  font-size: small;
+  font-weight: 600;
+}
+
 .scroll-y {
   overflow-y: scroll;
   height: 400px;
 }
+
+
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -38,7 +56,7 @@ body {
 .sidebar {
   position: fixed;
   left: 0px; 
-  top: 7vh;
+  top: 12vh;
   width: 27vh;
   height: 45vh;
   background-color: rgb(from black r g b); /*  */
@@ -68,7 +86,7 @@ body {
 
 .container {
   position: absolute;
-  top: 8vh;
+  top: 12vh;
   left: 30vh;
   background-color: aliceblue;
 }
