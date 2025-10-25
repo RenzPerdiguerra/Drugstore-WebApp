@@ -14,8 +14,8 @@ def get_products(conn):
             'b_name': b_name,
             'd_arrived': d_arrived,
             'd_exp': d_exp,
-            'price': price,
             'cost': cost,
+            'price': price,
             'stock': stock,
             'stock_status': stock_status,
             'created_at': created_at
@@ -27,10 +27,10 @@ def get_products(conn):
 def insert_product(conn, products):
     cur = conn.cursor()
     data = (products['category'],products['g_name'], products['b_name'],
-            products['d_arrived'], products['d_exp'], products['price'], products['cost'],
+            products['d_arrived'], products['d_exp'], products['cost'], products['price'], 
             products['stock'], products['stock_status'])
     query = ("INSERT INTO management.products "
-             "(category, g_name, b_name, d_arrived, d_exp, price, cost, stock, stock_status)"
+             "(category, g_name, b_name, d_arrived, d_exp, cost, price, stock, stock_status)"
              "VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
              "RETURNING prod_id")
     cur.execute(query, data)
