@@ -1,15 +1,15 @@
 
-var productsListApiUrl = 'http://127.0.0.1:5000/getProducts';
-var productsSaveApiUrl = 'http://127.0.0.1:5000/insertProduct';
-var productsRemoveApiUrl = 'http://127.0.0.1:5000/deleteProduct';
+var productListApiUrl = 'http://127.0.0.1:5000/getProducts';
+var productSaveApiUrl = 'http://127.0.0.1:5000/insertProduct';
+var productRemoveApiUrl = 'http://127.0.0.1:5000/deleteProduct';
 
 function callApi(method, url, data) {
-    $.ajax({
+    return $.ajax({
         method: method,
         url: url,
-        data: data
-    }).done(function( msg ) {
-        window.location.reload();
-    });
+        data: data,
+        contentType: 'application/json',
+        dataType: 'json'
+    })
 }
 
