@@ -4,4 +4,8 @@ backend/__pycache__
 backend/unitTest_dao.py
 backend/uom_dao.py
 ui/js/saveProductBtn.js
-ui
+ui/css/index.css
+ui/css/login_styles.css
+ui/images
+ui/toadd
+ui/login.html
