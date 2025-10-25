@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
+from flask_cors import CORS
 import json
 from sql_connector import get_sql_connection
 
@@ -6,8 +7,8 @@ import products_dao
 import orders_dao
 import uom_dao
 
-
 app = Flask(__name__)
+CORS(app)
 conn = get_sql_connection()
 
 
@@ -22,12 +23,11 @@ def getProducts():
 @app.route('/insertProduct', methods=['POST'])
 def insertProduct():
     # adds products
-    request_payload = json.loads(request.form['data'])
+    request_payload = request.get_json()
     prod_id = products_dao.insert_product(conn, request_payload)
     response = jsonify({
         'prod_id' : prod_id
     })
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @app.route('/deleteProduct', methods=['POST'])
@@ -100,7 +100,7 @@ def deleteUom():
 
 
 if __name__ == '__main__':
-    print("Starting Flask Server for Grocery Store Management System")
+    print("Starting Flask Server for Drugstore Point-of-Sale System")
     app.run(debug=True) # allows restart while changes are made
     
     
