@@ -1,13 +1,3 @@
-function showModal(formHtml) {
-    $('#modalContent').html(formHtml);
-    $('#modalOverlay').removeClass('hidden');
-}
-
-function hideModal() {
-    $('#modalOverlay').addClass('hidden');
-    $('#modalContent').empty();
-}
-
 $(function () {
     // Define the API endpoint URL
     $.get(productListApiUrl, function (response) {
@@ -30,8 +20,8 @@ $(function () {
                     '<td>' + product.g_name + '</td>' +
                     '<td>' + product.b_name + '</td>' +
                     '<td>' + product.price + '</td>' +
-                    '<td>' + product.d_arrived + '</td>' +
-                    '<td>' + product.d_exp + '</td>' +
+                    '<td>' + formatDateLong(product.d_arrived) + '</td>' +
+                    '<td>' + formatDateLong(product.d_exp) + '</td>' +
                     '<td>' + product.cost + '</td>' +
                     '<td>' + product.stock + '</td>' +
                     '<td>' + product.stock_status + '</td>' +
@@ -57,8 +47,8 @@ $(document).on("click", "#edit-btn", function () {
         category: $tr.data('category'),
         g_name: $tr.data('gname'),
         b_name: $tr.data('bname'),
-        d_arrived: $tr.data('datearrived'),
-        d_exp: $tr.data('dateexpired'),
+        d_arrived: formatDateISO($tr.data('datearrived')),
+        d_exp: formatDateISO($tr.data('dateexpired')),
         cost: $tr.data('cost'),
         price: $tr.data('price'),
         stock: $tr.data('stock'),
@@ -131,9 +121,9 @@ $('#modalOverlay').on('click', '#saveEditBtn', function() {
         b_name: null,
         d_arrived: null,
         d_exp: null,
-        cost: null,
-        price: null,
-        stock: null,
+        cost: parseFloat($('#cost').val()) ,
+        price: parseFloat($('#price').val()),
+        stock: parseInt($('#stock').val(), 10),
         stock_status: null
     };
     
@@ -141,9 +131,7 @@ $('#modalOverlay').on('click', '#saveEditBtn', function() {
         requestPayload[field.name] = field.value;
     });
 
-    callApi('POST', productSaveApiUrl, {
-        data: JSON.stringify(requestPayload)
-    })
+    callApi('POST', productSaveApiUrl, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
         console.error("API request failed:", status, error);
         alert('Failed to save product. Please try again.');
