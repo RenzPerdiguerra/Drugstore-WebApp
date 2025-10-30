@@ -1,6 +1,17 @@
+import callApi,
+    {productApi,
+    createJSONRequest,
+    showModal,
+    hideModal,
+    escapeHtml,
+    formatDateISO,
+    formatDateLong}
+    from './common.js'
+// These API should be grouped based on functionality: APIs, utility & modal
+
 $(function () {
     // Define the API endpoint URL
-    $.get(productListApiUrl, function (response) {
+    $.get(productApi.list, function (response) {
         if (response && Array.isArray(response)) {
             var table = '';
             $.each(response, function (index, product) {
@@ -36,7 +47,7 @@ $(function () {
     }).fail(function (xhr, status, error) {
         console.error("API request failed: ", status, error);
         $("table").find("tbody").html('<tr><td colspan="11">Failed to load products. Please try again later.</td></tr>');
-    }); 
+    });
 }); 
 
 $(document).on("click", "#edit-btn", function () {
@@ -113,31 +124,17 @@ $(document).on("click", "#edit-btn", function () {
     showModal(formHtml);
 });
 
-$('#modalOverlay').on('click', '#saveEditBtn', function() {
-    var data = $('#productForm').serializeArray();
-    var requestPayload = {
-        category: null,
-        g_name: null,
-        b_name: null,
-        d_arrived: null,
-        d_exp: null,
-        cost: parseFloat($('#cost').val()) ,
-        price: parseFloat($('#price').val()),
-        stock: parseInt($('#stock').val(), 10),
-        stock_status: null
-    };
-    
-    $.each(data, function(index, field) {
-        requestPayload[field.name] = field.value;
-    });
+$('#modalOverlay').on('click', '#saveEditBtn', function(){
 
-    callApi('POST', productSaveApiUrl, JSON.stringify(requestPayload))
+    const requestPayload = createJSONRequest();
+    
+    callApi('POST', productApi.save, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
         console.error("API request failed:", status, error);
         alert('Failed to save product. Please try again.');
     })
     .done(function(response) {
-        if (response && response.success) {
+        if (response) {
             alert('Product saved successfully!');
             location.reload();
         }
@@ -150,16 +147,25 @@ $('#modalOverlay').on('click', '#saveEditBtn', function() {
 });
 
 
-$(document).on("click", ".delete-product", function (){
+$(document).on("click", "#delete-btn", function (){
     var tr = $(this).closest('tr');
     var data = {
         product_id : tr.data('id')
     };
     var isDelete = confirm("Are you sure to delete "+ tr.data('name') +" item?");
     if (isDelete) {
-        callApi("POST", productDeleteApiUrl, data);
-    }
-    hideModal();
+        callApi("POST", productApi.remove, JSON.stringify(data))
+        .fail(function(xhr, status, error) {
+            console.error("API request failed:", status, error);
+            alert('Failed to delete product. Please try again.');
+        })
+        .done(function(response) {
+            if (response) {
+                alert('Product deleted successfully!');
+                location.reload();
+            }
+        })
+    };
 });
 
 
@@ -227,24 +233,10 @@ $('#insertProductTrigger').on('click', function() {
 // Delegate save button logic
 
 $('#modalOverlay').on('click', '#saveProductBtn', function() {
-    var data = $('#productForm').serializeArray();
-    var requestPayload = {
-        category: null,
-        g_name: null,
-        b_name: null,
-        d_arrived: null,
-        d_exp: null,
-        cost: parseFloat($('#cost').val()) ,
-        price: parseFloat($('#price').val()),
-        stock: parseInt($('#stock').val(), 10),
-        stock_status: null
-    };
-    
-    $.each(data, function(index, field) {
-        requestPayload[field.name] = field.value;
-    });
 
-    callApi('POST', productSaveApiUrl, JSON.stringify(requestPayload))
+    const requestPayload = createJSONRequest();
+
+    callApi('POST', productApi.save, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
     console.error("API request failed:", status, error);
     alert('Failed to save product. Please try again.');

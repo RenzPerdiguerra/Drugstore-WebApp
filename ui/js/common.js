@@ -1,10 +1,13 @@
 // reusable APIs
-var productListApiUrl = 'http://127.0.0.1:5000/getProducts';
-var productSaveApiUrl = 'http://127.0.0.1:5000/insertProduct';
-var productRemoveApiUrl = 'http://127.0.0.1:5000/deleteProduct';
+
+export const productApi = {
+  list: 'http://127.0.0.1:5000/getProducts',
+  save: 'http://127.0.0.1:5000/insertProduct',
+  remove: 'http://127.0.0.1:5000/deleteProduct'
+};
 
 // manage-product.js methods
-function callApi(method, url, data) {
+export default function callApi(method, url, data) {
     return $.ajax({
         method: method,
         url: url,
@@ -14,17 +17,38 @@ function callApi(method, url, data) {
     })
 }
 
-function showModal(formHtml) {
+export function createJSONRequest() {
+    var data = $('#productForm').serializeArray();
+    var requestPayload = {
+        category: null,
+        g_name: null,
+        b_name: null,
+        d_arrived: null,
+        d_exp: null,
+        cost: parseFloat($('#cost').val()) ,
+        price: parseFloat($('#price').val()),
+        stock: parseInt($('#stock').val(), 10),
+        stock_status: null
+    };
+    
+    $.each(data, function(index, field) {
+        requestPayload[field.name] = field.value;
+    })
+
+    return requestPayload
+}
+
+export function showModal(formHtml) {
     $('#modalContent').html(formHtml);
     $('#modalOverlay').removeClass('hidden');
 }
 
-function hideModal() {
+export function hideModal() {
     $('#modalOverlay').addClass('hidden');
     $('#modalContent').empty();
 }
 
-function escapeHtml(str) {
+export function escapeHtml(str) {
 return String(str)
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
@@ -33,11 +57,11 @@ return String(str)
     .replace(/>/g, '&gt;');
 }
 
-function formatDateISO(dateStr) {
+export function formatDateISO(dateStr) {
     return new Date(dateStr).toISOString().slice(0, 10);
 }
 
-function formatDateLong(dateStr) {
+export function formatDateLong(dateStr) {
     const date = new Date(dateStr);
     return new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
@@ -46,8 +70,7 @@ function formatDateLong(dateStr) {
     }).format(date);
 }
 
-function formatToRFC1123(isoDateStr) {
+export function formatToRFC1123(isoDateStr) {
     const date = new Date(isoDateStr);
     return date.toUTCString();
 }
-
