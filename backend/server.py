@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 from sql_connector import get_sql_connection
@@ -33,11 +33,12 @@ def insertProduct():
 @app.route('/deleteProduct', methods=['POST'])
 def deleteProduct():
     # deletes products
-    prod_id = products_dao.delete_product(conn, request.form['prod_id'])
+    request_payload = request.get_json()
+    scalar_payload = request_payload.get('product_id')
+    prod_id = products_dao.delete_product(conn, scalar_payload)
     response = jsonify({
         'prod_id' : prod_id
     })
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @app.route('/getOrders', methods=['GET'])
