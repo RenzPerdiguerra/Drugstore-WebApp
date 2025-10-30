@@ -7,5 +7,6 @@ ui/js/saveProductBtn.js
 ui/css/index.css
 ui/css/login_styles.css
 ui/images
-ui/toadd
 ui/login.html
+toadd
+.vscode
