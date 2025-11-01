@@ -1,0 +1,69 @@
+body {
+    background-image: url("/ui/images/login_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 123, 255, 0.3); // Bootstrap blue with 30% opacity //
+  z-index: -1; // Behind your content //
+}
+*/
+
+#homepage {
+    position: relative;
+    height: 70vh; 
+    width: 1000px;
+    margin: auto;
+    background-color: rgb(41, 135, 218);
+}
+
+#announcement {
+    padding: 10px;
+    margin: 10px 10px;
+    height: 67vh; 
+    width: 750px;
+    background-color: aliceblue;
+}
+
+
+#navbar-service {
+    padding: 2px;
+    margin: 10px 10px;
+    height: 67vh; 
+    width: 250px;    
+}
+
+.container {
+    margin: 10px;
+    height: 500px;
+    width: 500px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgb(0, 0, 0.2);
+}
+
+.container-header {
+    padding: 10px;
+    font-size: x-large;
+    font-weight: 800;
+}
+
+.container-body {
+    padding: 10px;
+    font-size: x-large;
+    font-weight: 800;
+}
