@@ -5,32 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel='stylesheet' type="text/css" href="ui/css/bootstrap.css">
-    <link rel='stylesheet' type="text/css" href="ui/css/index.css">
+    <link rel='stylesheet' type="text/css" href="ui/css/index2.css">
 </head>
 <body>
-    <div class="container">
-        <div class="container-header">Choose a Service</div>
-        <div class="container-body">
-            <div class="service-card" onclick="location.href='ui/manage-product.html'">
-                <h3>Products</h3>
-            </div>
-            <div class="service-card" onclick="location.href='ui/orders.html'">
-                <h3>Ordering</h3>
-            </div>
-            <!--
-            <div class="service-card" onclick="location.href='reports.html'">
-                <h3>Reports</h3>
-            </div>
-            <div class="service-card" onclick="location.href='reports.html'">
-                <h3>Employees</h3>
-            </div>
-            <div class="service-card" onclick="location.href='reports.html'">
-                <h3>Documents</h3>
-            </div>
-            -->
+  <div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="card p-4 sha    dow w-100" style="max-width: 400px;">
+      <h3 class="text-center mb-4">Login to MelPharma</h3>
+
+      <form id="loginForm">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" required>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-success">Login</button>
+          <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+      </form>
+        <!--
+        <div>
+            <span class="remember-btn">Remember me</span>
+        </div>
+        <div class="form-note">
+            <span class="signup-sugg">Don't have an account? Sign up.</span>
+        </div>
+        -->      
+      <!-- You can add more blocks below -->
+        <div class="mt-4 text-center">
+        <small>Need help? Contact support.</small>
+      </div>
     </div>
-    
-    <script src="ui/js/jquery.js"></script>
-    <!-- PUT INDEX/DASHBOARD script here-->
+  </div>
 </body>
 </html>

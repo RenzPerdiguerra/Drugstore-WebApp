@@ -1,0 +1,45 @@
+/* Ensure full viewport height and remove default spacing */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;/* Bootstrap's light background */
+}
+
+/* Optional: background image styling */
+body {
+  background-image: url("/ui/images/pharmacy_bg.jpg");
+  background-size: cover;
+  background-position: center -850px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Flex container to center content */
+.container-fluid {
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card styling for the login box */
+.card {
+  background-color: rgba(255, 255, 255, 0.95); /* Slight transparency over background */
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: -100px;
+}
+
+/* Input and button spacing */
+.form-control {
+  border-radius: 4px;
+}
+
+.btn {
+  min-width: 100px;
+}
+
+/* Feedback message styling */
+#loginFeedback {
+  font-size: 0.9rem;
+}
