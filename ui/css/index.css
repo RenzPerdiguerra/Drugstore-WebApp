@@ -9,7 +9,7 @@ html, body {
 body {
   background-image: url("/ui/images/pharmacy_bg.jpg");
   background-size: cover;
-  background-position: center -850px;
+  background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
