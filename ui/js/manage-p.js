@@ -7,10 +7,9 @@ import callApi,
     formatDateISO,
     formatDateLong}
     from './common.js'
-// These API should be grouped based on functionality: APIs, utility & modal
 
+// Iterates instantiation of products list per row with Edit and Delete buttons
 $(function () {
-    // Define the API endpoint URL
     $.get(productApi.list, function (response) {
         if (response && Array.isArray(response)) {
             var table = '';
@@ -37,8 +36,8 @@ $(function () {
                     '<td>' + product.stock + '</td>' +
                     '<td>' + product.stock_status + '</td>' +
                     '<td>' +
-                        '<button class="btn btn-primary btn-sm" id="edit-btn">Edit</button> ' +
-                        '<button class="btn btn-danger btn-sm" id="delete-btn">Delete</button>' +
+                        '<button class="btn btn-primary btn-sm edit-btn" id="edit-btn" data-id="' + product.prod_id + '">Edit</button> ' // mark each row with their id for edit btn row data navigation
+                        + '<button class="btn btn-danger btn-sm" id="delete-btn">Delete</button>' +
                     '</td>' +
                 '</tr>';
             });
@@ -50,8 +49,8 @@ $(function () {
     });
 }); 
 
+// Creates a pre-filled form via DOM manipulation and retrieves payload via nearest row data, user input and object creation
 $(document).on("click", "#edit-btn", function () {
-    // Edit button clicked
     var $tr = $(this).closest('tr');
     var row = {
         prod_id: $tr.data('id'),
@@ -122,37 +121,36 @@ $(document).on("click", "#edit-btn", function () {
         </form>
   `;
     showModal(formHtml);
+    const prod_id = $(this).data('id');
+    $('#saveEditBtn').data('id', prod_id);
 });
 
+// Create and saves payload from Edit form inputs
 $('#modalOverlay').on('click', '#saveEditBtn', function(){
-
-    const requestPayload = createJSONRequest();
+    var prod_id = $(this).data('id');
+    const requestPayload = createJSONRequest('#productForm', {prod_id});
     
-    callApi('POST', productApi.save, JSON.stringify(requestPayload))
+    callApi('PUT', productApi.update, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
         console.error("API request failed:", status, error);
         alert('Failed to save product. Please try again.');
     })
     .done(function(response) {
         if (response) {
-            alert('Product saved successfully!');
+            alert('Update saved successfully!');
             location.reload();
         }
     });
     hideModal();
-    /* If hideModal() does not work
-    $('#modalOverlay').addClass('hidden');
-    $('#modalContent').empty();
-    */
 });
 
-
+// Deletes nearest row data via data-id
 $(document).on("click", "#delete-btn", function (){
     var tr = $(this).closest('tr');
     var data = {
         product_id : tr.data('id')
     };
-    var isDelete = confirm("Are you sure to delete "+ tr.data('name') +" item?");
+    var isDelete = confirm("Are you sure to delete "+ tr.data('name') +" item?"); // Prompts confimation of delete procedure
     if (isDelete) {
         callApi("POST", productApi.remove, JSON.stringify(data))
         .fail(function(xhr, status, error) {
@@ -168,11 +166,7 @@ $(document).on("click", "#delete-btn", function (){
     };
 });
 
-
-// I need a form to collect data from the user
-// When the user clicks the save button, collect the data from the form and send it to the API endpoint
-// After the API call is successful, reload the page to reflect the changes
-
+// Creates a blank form requiring details of the new product
 $('#insertProductTrigger').on('click', function() {
     const formHtml = `
         <form id="productForm">
@@ -229,12 +223,9 @@ $('#insertProductTrigger').on('click', function() {
     showModal(formHtml);
 });
 
-
-// Delegate save button logic
-
+// Saves the inputs from #insertProduct form and reloads the page
 $('#modalOverlay').on('click', '#saveProductBtn', function() {
-
-    const requestPayload = createJSONRequest();
+    const requestPayload = createJSONRequest('#productForm');
 
     callApi('POST', productApi.save, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
@@ -250,7 +241,7 @@ $('#modalOverlay').on('click', '#saveProductBtn', function() {
     hideModal();
 });
 
-// Close modal
+// Closes the #insertProduct form
 $('#modalOverlay').on('click', '#closeModalBtn', function() {
     hideModal();
 });

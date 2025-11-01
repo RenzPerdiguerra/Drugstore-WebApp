@@ -1,12 +1,12 @@
-// reusable APIs
-
+// RESTful endpoints for listing, saving, updating, and deleting products
 export const productApi = {
-  list: 'http://127.0.0.1:5000/getProducts',
-  save: 'http://127.0.0.1:5000/insertProduct',
-  remove: 'http://127.0.0.1:5000/deleteProduct'
+    list: 'http://127.0.0.1:5000/getProducts',
+    save: 'http://127.0.0.1:5000/insertProduct',
+    update: 'http://127.0.0.1:5000/updateProduct',
+    remove: 'http://127.0.0.1:5000/deleteProduct'
 };
 
-// manage-product.js methods
+// Generic AJAX wrapper for sending JSON requests to the backend
 export default function callApi(method, url, data) {
     return $.ajax({
         method: method,
@@ -17,37 +17,38 @@ export default function callApi(method, url, data) {
     })
 }
 
-export function createJSONRequest() {
-    var data = $('#productForm').serializeArray();
-    var requestPayload = {
-        category: null,
-        g_name: null,
-        b_name: null,
-        d_arrived: null,
-        d_exp: null,
-        cost: parseFloat($('#cost').val()) ,
-        price: parseFloat($('#price').val()),
-        stock: parseInt($('#stock').val(), 10),
-        stock_status: null
-    };
-    
-    $.each(data, function(index, field) {
-        requestPayload[field.name] = field.value;
-    })
+// Creates request payload with form inputs and edit button data-id. Used parameters for field extensions
+export function createJSONRequest(formSelector, extraFields = {}) {
+    // creates an object for insert and edit button form values
+    const form = $(formSelector);
+    const data = {
+        category: form.find('[name="category"]').val(),
+        g_name: form.find('[name="g_name"]').val(),
+        b_name: form.find('[name="b_name"]').val(),
+        d_arrived: form.find('[name="d_arrived"]').val(),
+        d_exp: form.find('[name="d_exp"]').val(),
+        cost: form.find('[name="cost"]').val(),
+        price: form.find('[name="price"]').val(),
+        stock: form.find('[name="stock"]').val(),
+        stock_status: form.find('[name="stock_status"]').val()
+  };
 
-    return requestPayload
+    return { ...data, ...extraFields }; // returns a merged object
 }
 
+// Shows intended form
 export function showModal(formHtml) {
     $('#modalContent').html(formHtml);
     $('#modalOverlay').removeClass('hidden');
 }
 
+// Hides intended form
 export function hideModal() {
     $('#modalOverlay').addClass('hidden');
     $('#modalContent').empty();
 }
 
+// Provides alternative str for form inputs with blanks or special chars
 export function escapeHtml(str) {
 return String(str)
     .replace(/&/g, '&amp;')
@@ -57,10 +58,12 @@ return String(str)
     .replace(/>/g, '&gt;');
 }
 
+// Formats date to 'YYYY-MM-DD'
 export function formatDateISO(dateStr) {
     return new Date(dateStr).toISOString().slice(0, 10);
 }
 
+// Formats date to 'Month Day, YYYY'
 export function formatDateLong(dateStr) {
     const date = new Date(dateStr);
     return new Intl.DateTimeFormat('en-US', {
@@ -70,6 +73,7 @@ export function formatDateLong(dateStr) {
     }).format(date);
 }
 
+// Formats date to UTC
 export function formatToRFC1123(isoDateStr) {
     const date = new Date(isoDateStr);
     return date.toUTCString();

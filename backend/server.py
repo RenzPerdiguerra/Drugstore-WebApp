@@ -22,7 +22,7 @@ def getProducts():
 
 @app.route('/insertProduct', methods=['POST'])
 def insertProduct():
-    # adds products
+    # adds product data 
     request_payload = request.get_json()
     prod_id = products_dao.insert_product(conn, request_payload)
     response = jsonify({
@@ -30,9 +30,19 @@ def insertProduct():
     })
     return response
 
+@app.route('/updateProduct', methods=['PUT'])
+def updateProduct():
+    # updates product list
+    request_payload = request.get_json()    
+    prod_id = products_dao.update_product(conn, request_payload)
+    response = jsonify({
+        'prod_id' : prod_id
+    })
+    return response
+
 @app.route('/deleteProduct', methods=['POST'])
 def deleteProduct():
-    # deletes products
+    # deletes a single product data
     request_payload = request.get_json()
     scalar_payload = request_payload.get('product_id')
     prod_id = products_dao.delete_product(conn, scalar_payload)
@@ -43,7 +53,7 @@ def deleteProduct():
 
 @app.route('/getOrders', methods=['GET'])
 def getOrders():
-    # gets product list requested
+    # gets order list requested
     payload = orders_dao.get_orders(conn)
     response = jsonify(payload)
     response.headers.add('Access-Control-Allow-Origin', '*')
@@ -51,7 +61,7 @@ def getOrders():
 
 @app.route('/insertOrder', methods=['POST'])
 def insertOrder():
-    # adds products
+    # adds order data
     request_payload = json.loads(request.form['data'])
     order_id = orders_dao.insert_order(conn, request_payload)
     response = jsonify({
@@ -62,7 +72,7 @@ def insertOrder():
 
 @app.route('/deleteOrder', methods=['POST'])
 def deleteOrder():
-    # deletes products
+    # deletes order data
     order_id = orders_dao.delete_order(conn, request.form['order_id'])
     response = jsonify({
         'order_id' : order_id
@@ -72,7 +82,7 @@ def deleteOrder():
 
 @app.route('/getUom', methods=['GET'])
 def getUom():
-    # gets product list requested
+    # gets uom list requested
     payload = uom_dao.get_uom(conn)
     response = jsonify(payload)
     response.headers.add('Access-Control-Allow-Origin', '*')
@@ -80,7 +90,7 @@ def getUom():
 
 @app.route('/insertUom', methods=['POST'])
 def insertUom():
-    # adds products
+    # adds uom
     request_payload = json.loads(request.form['data'])
     uom_id = uom_dao.insert_uom(conn, request_payload)
     response = jsonify({
@@ -91,7 +101,7 @@ def insertUom():
 
 @app.route('/deleteUom', methods=['POST'])
 def deleteUom():
-    # deletes products
+    # deletes uom
     uom_id = uom_dao.delete_uom(conn, request.form['uom_id'])
     response = jsonify({
         'uom_id' : uom_id
@@ -103,6 +113,4 @@ def deleteUom():
 if __name__ == '__main__':
     print("Starting Flask Server for Drugstore Point-of-Sale System")
     app.run(debug=True) # allows restart while changes are made
-    
-    
     
