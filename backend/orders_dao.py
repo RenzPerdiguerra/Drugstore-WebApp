@@ -6,18 +6,14 @@ def get_orders(conn):
     cur.execute(query)
     
     response = []
-    for (order_id, category, g_name, b_name, uom, order_qty, cost, total_cost, d_exp, d_oforder) in cur:
+    for (order_id, category, g_name, b_name, uom, cost) in cur:
         response.append({
             'order_id': order_id,
             'category': category,
             'g_name': g_name,
             'b_name': b_name,
             'uom': uom,
-            'order_qty': order_qty,
-            'cost': cost,
-            'total_cost': total_cost,
-            'd_exp': d_exp,
-            'd_oforder': d_oforder
+            'cost': cost
         })
         
     cur.close()

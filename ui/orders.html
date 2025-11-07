@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/ui/css/modify.css" rel="stylesheet">
+</head>
+<body class="container-fluid">
+    <div class="bg-info justify-content-center px-2 m-1" id="orders-header">
+        <nav class="d-flex flex-column">
+            <span class="d-flex justify-content-center mb-3 fw-bold">Ordering</span>
+            <ul class="nav nav-pills">
+                <li class="nav-item"></li>
+                    <button class="nav-item btn btn-primary text-dark m-1 mb-2">Order Here</button>
+                </li> 
+                <li class="nav-item"></li>
+                    <button class="nav-item btn btn-primary text-dark m-1 mb-2">Pending Confirmation</button>
+                </li>
+                <li class="nav-item"></li>
+                    <button class="nav-item btn btn-primary text-dark m-1 mb-2">Confirmed Orders</button>
+                </li>
+                <!--Replace li groupings for removing bullets-->
+                <!--Add borders-->
+                <!--Supposed to be a frontend intervention to replace the whole row and not go to another page. Replace <anchor>-->
+            </ul>
+        </nav>
+    </div>
+    <div class="text-light" id="orders-body">
+        <div class="d-flex flex-column align-content-center bg-primary m-1" id="orders-list" >
+            <!--Input orders list here-->
+            <div id="table-header">
+                <h4>Manage Orders</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered w-100">
+                    <thead>
+                        <th>Order ID</th>
+                        <th>Category</th>
+                        <th>Generic Name</th>
+                        <th>Branded Name</th>
+                        <th>Unit</th>
+                        <th>Cost</th>
+                        <th style="width: 100px">Action</th>
+                    </thead>
+                    <tbody>
+                        <!--Insert Table Rows here-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--Add class for scrolling ul that will only appear when first span exceeds the area -->
+        <div class="bg-secondary m-1" id="orders-calc">
+            <ul class="d-flex flex-column m-2">
+                <span class="col mb-1">Buttons for checkout & clear queue</span>
+                <span class="col mb-1">Item Name/Cost/Total</span>
+                <span class="col mb-1">Separation line for total lines</span>
+                <span class="col mb-1">Total Cost</span>
+                <span class="col mb-1">Other info needed</span>
+            </ul>
+        </div>
+    </div>
+<script src="./js/jquery.js"></script>
+<script type="module" src="./js/common.js"></script>
+<script type="module" src="./js/orders.js"></script>
+</body>
+</html>
