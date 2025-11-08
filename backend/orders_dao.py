@@ -19,13 +19,13 @@ def get_orders(conn):
     cur.close()
     return response
 
-def insert_order(conn, orders):
+def insert_order_item(conn, orders):
     cur = conn.cursor()
-    data= (orders['category'], orders['g_name'], orders['b_name'], orders['uom'],
-           orders['order_qty'], orders['cost'], orders['total_cost'], orders['d_exp'])
+    data= (orders['category'], orders['g_name'], orders['b_name'],
+           orders['uom'], orders['cost'])
     query = ("INSERT INTO management.orders "
-            "(category, g_name, b_name, uom, order_qty, cost, total_cost, d_exp)"
-            "VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"
+            "(category, g_name, b_name, uom, cost"
+            "VALUES(%s, %s, %s, %s, %s)"
             "RETURNING order_id")
     cur.execute(query, data)
     order_id = cur.fetchone()[0]
@@ -34,7 +34,20 @@ def insert_order(conn, orders):
     cur.close()
     return order_id
 
-def delete_order(conn, order_id):
+def update_order_item(conn, orders):
+    cur = conn.cursor()
+    data = (orders['category'], orders['g_name'], orders['b_name'], orders['unit'], orders['cost'], )
+    query = ("UPDATE management.orders"
+            "SET category = %s, g_name = %s, b_name = %s, unit = %s, cost = %s"
+            "WHERE order_id = %s RETURNING order_id")
+    cur.execute(query, data)
+    updated_id = cur.fetchone()
+    
+    conn.commit()
+    cur.close()
+    return updated_id[0] if updated_id else None
+
+def delete_order_item(conn, order_id):
     cur = conn.cursor()
     query = "DELETE FROM management.orders WHERE order_id = %s RETURNING order_id"
     cur.execute(query, (order_id,))
@@ -48,7 +61,7 @@ def delete_order(conn, order_id):
 # UNIT TEST
 if __name__ == '__main__':
     conn = get_sql_connection()    
-    delete_order(conn, 6)
+    delete_order_item(conn, 6)
      
 '''
     for x in get_orders(conn):
@@ -59,10 +72,7 @@ if __name__ == '__main__':
     'g_name': 'Felodipine',
     'b_name':'Neophel', 
     'uom': 'piece',
-    'order_qty':50,
     'cost':13.75,
-    'total_cost':68750,
-    'd_exp':'2028/10/12' 
     })
 
 '''

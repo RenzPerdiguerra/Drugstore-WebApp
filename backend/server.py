@@ -51,29 +51,41 @@ def deleteProduct():
     })
     return response
 
-@app.route('/getOrders', methods=['GET'])
-def getOrders():
+@app.route('/getOrderList', methods=['GET'])
+def getOrdersList():
     # gets order list requested
     payload = orders_dao.get_orders(conn)
     response = jsonify(payload)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/insertOrder', methods=['POST'])
-def insertOrder():
+@app.route('/insertOrderItem', methods=['POST'])
+def insertOrderItem():
     # adds order data
-    request_payload = json.loads(request.form['data'])
-    order_id = orders_dao.insert_order(conn, request_payload)
+    request_payload = request.get_json()
+    order_id = orders_dao.insert_order_item(conn, request_payload)
     response = jsonify({
         'order_id' : order_id
     })
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/deleteOrder', methods=['POST'])
-def deleteOrder():
+@app.route('/updateOrderItem', methods=['PUT'])
+def updateOrderItem():
+    # updates product list
+    request_payload = request.get_json()    
+    order_id = orders_dao.update_order_item(conn, request_payload)
+    response = jsonify({
+        'order_id' : order_id
+    })
+    return response
+
+@app.route('/deleteOrderItem', methods=['POST'])
+def deleteOrderItem():
     # deletes order data
-    order_id = orders_dao.delete_order(conn, request.form['order_id'])
+    request_payload = request.get_json()
+    scalar_payload = request_payload.get('order_id')
+    order_id = orders_dao.delete_order_item(conn, scalar_payload)
     response = jsonify({
         'order_id' : order_id
     })
