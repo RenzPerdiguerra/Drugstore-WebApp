@@ -15,11 +15,7 @@ CREATE SCHEMA IF NOT EXISTS management;
         g_name varchar(50) NOT NULL,
 		b_name varchar(50),
 		uom varchar(50),
-		order_qty INT,
-		cost DECIMAL(10,2),
-		total_cost DECIMAL(10,2),
-		d_exp DATE,
-        d_ofOrder TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+		cost DECIMAL(10,2)
     );
 
 	-- serves as item lists and stock management
