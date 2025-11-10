@@ -20,7 +20,7 @@
 
 #orders-body {
     display: grid;
-    grid-template-columns: 4.5fr 1.5fr;
+    grid-template-columns: 3.5fr 2.5fr;
 }
 
 .table-responsive {
@@ -33,6 +33,19 @@
 h4 {
     font-size: var(--font-title);
     margin: var(--space-xs);
+}
+
+#orders-calculation span {
+    height: 7px;
+    width: 5px;
+}
+
+.line {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    height: 2px;
+    background-color: #333;
 }
 /* || Page Styles */
 /* || Utilities */

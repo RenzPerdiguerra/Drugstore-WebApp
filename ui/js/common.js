@@ -7,10 +7,10 @@ export const productApi = {
 };
 
 export const orderApi = {
-    list: 'http://127.0.0.1:5000/getOrders',
-    save: 'http://127.0.0.1:5000/insertOrder',
-    update: 'http://127.0.0.1:5000/updateOrder',
-    remove: 'http://127.0.0.1:5000/deleteOrder'
+    list: 'http://127.0.0.1:5000/getOrderList',
+    save: 'http://127.0.0.1:5000/insertOrderItem',
+    update: 'http://127.0.0.1:5000/updateOrderItem',
+    remove: 'http://127.0.0.1:5000/deleteOrderItem'
 };
 
 // Generic AJAX wrapper for sending JSON requests to the backend
