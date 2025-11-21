@@ -48,25 +48,40 @@ $(document).on('change', 'input.form-check-input', function() {
         uom : $tr.data('unit'),
         cost : $tr.data('cost')
     };
+    const orderId = $tr.data('id')
 
-    var formHtml = `
-        <div class="d-flex selected-item m-1" data-cost="${requestPayload.cost}">
-            <div class="col col-md-4 d-flex justify-content-center">${requestPayload.g_name}</div>
-            <div class="col col-md-3 d-flex justify-content-center">${requestPayload.b_name}</div>
-            <!--Input Box for Qty of items required-->
-            <div class="col col-md-2 d-flex justify-content-center">
-                <input type="number" class="form-control qty-input" min="1" value="1" style="width: 70px;">
+    // Appends checked items and remove unchecked items
+    if ($(this).is(':checked')) {
+        var formHtml = `
+            <div class="d-flex m-1 selected-item" data-id="${orderId}" data-cost="${requestPayload.cost}">
+                <div class="col col-md-4 d-flex justify-content-center">${requestPayload.g_name}</div>
+                <div class="col col-md-3 d-flex justify-content-center">${requestPayload.b_name}</div>
+                <!--Input Box for Qty of items required-->
+                <div class="col col-md-2 d-flex justify-content-center">
+                    <input type="number" class="form-control qty-input" min="1" value="1" style="width: 70px;">
+                </div>
+                <!--Placeholder for Total Cost-->
+                <div class="col col-md-3 d-flex justify-content-center total-cost">${requestPayload.cost}</div>
             </div>
-            <!--Placeholder for Total Cost-->
-            <div class="col col-md-3 d-flex justify-content-center total-cost">${requestPayload.cost}</div>
-        </div>
-    `;
+        `;
+        $(".checked-items").append(formHtml);
+    } else {
+        $(`.selected-item[data-id="${orderId}"]`).remove();
+    }
 
-    $(".checked-rows").append(formHtml);
+    let sum = 0;
+
+    $('.total-cost').each(function(){
+        const val = parseFloat($(this).text().replace(/[^\d.-]/g, '') || 0);
+        sum += val;
+    });
+
+    $('#orders-sum').html(`₱${sum.toFixed(2)}`);
 });
 
-// Get input value to provide total cost per item
-$(document).on('input change', '.qty-input', function(){
+
+// Get qty input value to provide total cost per item and iterated over rendered items for the sum
+$(document).on('input', '.qty-input', function(){
     const qty = parseInt($(this).val()) || 1;
     const $row = $(this).closest('.selected-item');
     const rowCost = parseFloat($row.data('cost')) || 0;
@@ -74,4 +89,13 @@ $(document).on('input change', '.qty-input', function(){
     var totalCost = qty * rowCost;
 
     $row.find('.total-cost').text(`₱${totalCost.toFixed(2)}`);
+
+    let sum = 0;
+    $('.total-cost').each(function(){
+        const val = parseFloat($(this).text().replace(/[^\d.-]/g, '')) || 0;
+        sum += val;
+    });
+
+    $('#orders-sum').html(`₱${sum.toFixed(2)}`);
 });
+
