@@ -9,10 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="/ui/css/modify.css" rel="stylesheet">
 </head>
-<body class="container-fluid">
-    <div class="bg-info justify-content-center px-2 m-1" id="orders-header">
+<body class="container-fluid scroll-y">
+    <div class="bg-danger justify-content-center px-2 m-1 orders-header">
         <nav class="d-flex flex-column">
-            <span class="d-flex justify-content-center mb-3 fw-bold">Ordering</span>
+            <span class="d-flex justify-content-center mt-1 display-6">Ordering</span>
             <ul class="nav nav-pills">
                 <li class="nav-item"></li>
                     <button class="nav-item btn btn-primary text-dark m-1 mb-2">Order Here</button>
@@ -29,8 +29,8 @@
             </ul>
         </nav>
     </div>
-    <div class="text-light" id="orders-body">
-        <div class="d-flex flex-column align-content-center bg-primary m-1" id="orders-list" >
+    <div class="text-light orders-body">
+        <div class="d-flex flex-column align-content-center bg-primary m-1 orders-body-list" >
             <!--Input orders list here-->
             <div id="table-header">
                 <h4>Manage Orders</h4>
@@ -53,23 +53,23 @@
             </div>
         </div>
         <!--Add class for scrolling ul that will only appear when first span exceeds the area -->
-        <div class="bg-primary m-1">
-            <div class="container justify-content-center m-2 gap-4 text-dark" id="orders-calculation">
+        <div class="bg-primary m-1 scroll-y orders-body-checked">
+            <div class="container justify-content-center m-2 gap-4 text-dark orders-calculation">
                 <div class="row">
                     <div class="col col-md-4 d-flex justify-content-center">Generic</div>
                     <div class="col col-md-3 d-flex justify-content-center">Branded</div>
                     <div class="col col-md-2 d-flex justify-content-center">Qty</div>
                     <div class="col col-md-3 d-flex justify-content-center">Total Cost</div>
                 </div>
-                <div class="row checked-rows">
+                <div class="row checked-items">
                     <!--Insert Checked Boxes here-->
-                </div>    
+                </div>
             <div class="line mt-1"></div>
 
-            <div class="container m-2 gap-4 text-dark" id="orders-total-cost">
+            <div class="container m-2 gap-4 text-dark orders-final">
                 <div class="row">
                     <div class="col col-md-9 d-flex justify-content-end">Total Cost</div>
-                    <div class="col col-md-3 d-flex justify-content-center">Amount</div>
+                    <div class="col col-md-3 d-flex justify-content-center" id="orders-sum">Amount</div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button type="button" class="save btn btn-danger m-1">Cancel</button>
