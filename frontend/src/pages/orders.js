@@ -6,8 +6,10 @@ import callApi,
     escapeHtml,
     formatDateISO,
     formatDateLong,
-    productApi}
-    from './common.js'
+    productApi,
+    collectCheckedItems,
+    calculateRowTotal}
+    from '../services/orderService.js'
 
     // Renders order list
 $(function() {
@@ -53,7 +55,8 @@ $(document).on('change', 'input.form-check-input', function() {
     // Appends checked items and remove unchecked items
     if ($(this).is(':checked')) {
         var formHtml = `
-            <div class="d-flex m-1 selected-item" data-id="${orderId}" data-cost="${requestPayload.cost}">
+            <div class="d-flex m-1 selected-item" data-id="${orderId}" data-category="${requestPayload.category}"
+                data-cost="${requestPayload.cost}" data-unit="${requestPayload.unit}">
                 <div class="col col-md-4 d-flex justify-content-center">${requestPayload.g_name}</div>
                 <div class="col col-md-3 d-flex justify-content-center">${requestPayload.b_name}</div>
                 <!--Input Box for Qty of items required-->
@@ -79,23 +82,52 @@ $(document).on('change', 'input.form-check-input', function() {
     $('#orders-sum').html(`₱${sum.toFixed(2)}`);
 });
 
-
 // Get qty input value to provide total cost per item and iterated over rendered items for the sum
 $(document).on('input', '.qty-input', function(){
-    const qty = parseInt($(this).val()) || 1;
     const $row = $(this).closest('.selected-item');
-    const rowCost = parseFloat($row.data('cost')) || 0;
-    
-    var totalCost = qty * rowCost;
+    const rowTotal = calculateRowTotal($row);
 
-    $row.find('.total-cost').text(`₱${totalCost.toFixed(2)}`);
+    $row.find('.total-cost').text(`₱${rowTotal.toFixed(2)}`);
 
-    let sum = 0;
+    let grandTotal = 0;
     $('.total-cost').each(function(){
         const val = parseFloat($(this).text().replace(/[^\d.-]/g, '')) || 0;
-        sum += val;
+        grandTotal += val;
     });
 
-    $('#orders-sum').html(`₱${sum.toFixed(2)}`);
+    $('#orders-sum').html(`₱${grandTotal.toFixed(2)}`);
 });
 
+$.get(empListApi, function(response) {
+    if (response && Array.isArray(response)){
+        $.each(response, function(index, employees) {
+            const responsePayload = {
+                emp_id: employees.emp_id,
+                name: employees.name,
+                branch: employees.branch,
+                shift: employees.shift,
+                age: employees.age,
+                gender: employees.gender,
+                date_started: employees.date_started,
+                date_contractended: employees.date_contractended
+            };
+        })
+    }
+})
+
+
+/*
+$(document).on('click', '.submit', function (){
+
+    const orderBatchesPayload = 
+
+    const pendingBatchesPayload = 
+    // transfer sum value from another DOM function
+    // extract items from checked-items
+    // extract sum from qty-input DOM
+    // package into payload
+    // send via ajax
+    
+
+})
+*/

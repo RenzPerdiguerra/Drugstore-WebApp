@@ -1,17 +1,11 @@
-import callApi,
-    {productApi,
-    createJSONRequest,
-    showModal,
-    hideModal,
-    escapeHtml,
-    formatDateISO,
-    formatDateLong}
-    from './common.js'
+import {createJSONRequest} from '../services/orderService.js'
+import callApi, {productApi} from '../api/api.js'
+import {showModal, hideModal, escapeHtml, formatDateISO, formatDateLong} from '../utils/utility.js'
 
 // Iterates instantiation of products list per row with Edit and Delete buttons
 $(function () {
     $.get(productApi.list, function (response) {
-        if (response && Array.isArray(response)) {
+        if (response && Array.isArray(response)) { // conditional helps validating null/undefined/string data types
             var table = '';
             $.each(response, function (index, product) {
                 table += '<tr data-id="' + product.prod_id +
@@ -128,7 +122,7 @@ $(document).on("click", "#edit-btn", function () {
 // Create and saves payload from Edit form inputs
 $('#modalOverlay').on('click', '#saveEditBtn', function(){
     var prod_id = $(this).data('id');
-    const requestPayload = createJSONRequest('#productForm', {prod_id});
+    const requestPayload = createJsonRequest('#productForm', {prod_id});
     
     callApi('PUT', productApi.update, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
@@ -225,7 +219,7 @@ $('#insertProductTrigger').on('click', function() {
 
 // Saves the inputs from #insertProduct form and reloads the page
 $('#modalOverlay').on('click', '#saveProductBtn', function() {
-    const requestPayload = createJSONRequest('#productForm');
+    const requestPayload = createJsonRequest('#productForm');
 
     callApi('POST', productApi.save, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
