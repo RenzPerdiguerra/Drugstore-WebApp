@@ -1,5 +1,5 @@
 // Creates request payload with form inputs and edit button data-id. Used parameters for accommodating product id as field extension
-export function createJsonRequest(formSelector, extraFields = {}) {
+export function formToJson(formSelector, extraFields = {}) {
     // creates an object for insert and edit button form values
     const form = $(formSelector);
     const data = {

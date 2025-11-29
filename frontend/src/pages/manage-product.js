@@ -1,4 +1,4 @@
-import {createJSONRequest} from '../services/orderService.js'
+import {formToJson} from '../services/orderService.js'
 import callApi, {productApi} from '../api/api.js'
 import {showModal, hideModal, escapeHtml, formatDateISO, formatDateLong} from '../utils/utility.js'
 
@@ -122,7 +122,7 @@ $(document).on("click", "#edit-btn", function () {
 // Create and saves payload from Edit form inputs
 $('#modalOverlay').on('click', '#saveEditBtn', function(){
     var prod_id = $(this).data('id');
-    const requestPayload = createJsonRequest('#productForm', {prod_id});
+    const requestPayload = formToJson('#productForm', {prod_id});
     
     callApi('PUT', productApi.update, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
@@ -219,7 +219,7 @@ $('#insertProductTrigger').on('click', function() {
 
 // Saves the inputs from #insertProduct form and reloads the page
 $('#modalOverlay').on('click', '#saveProductBtn', function() {
-    const requestPayload = createJsonRequest('#productForm');
+    const requestPayload = formToJson('#productForm');
 
     callApi('POST', productApi.save, JSON.stringify(requestPayload))
     .fail(function(xhr, status, error) {
