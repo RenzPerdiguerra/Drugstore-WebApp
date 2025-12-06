@@ -5,12 +5,13 @@ CREATE SCHEMA IF NOT EXISTS management;
 	DROP TABLE IF EXISTS
 		users, products, orders, uom, branches, order_batches, pending_batches,
 		 confirmed_batches, order_events, employees, discounts cascade;
-	
-	CREATE TABLE users (
-		user_id SERIAL PRIMARY KEY,
-		username varchar(50) NOT NULL,
-		email varchar(50) NOT NULL
-	);
+
+	CREATE TABLE management.users (
+		id SERIAL PRIMARY KEY,
+		username TEXT NOT NULL UNIQUE,
+		password_hash varchar(255) NOT NULL,
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	)
 
 	-- serves as item lists and stock management
     CREATE TABLE products (
