@@ -1,4 +1,4 @@
-from sql_connector import get_sql_connection
+from backend.utils.sql_connector import get_sql_connection
 
 def get_orders(conn):
     cur = conn.cursor()
