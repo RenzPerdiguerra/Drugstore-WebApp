@@ -3,89 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MelPharma</title>
+    <title>MelPharma Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="/ui/css/modify.css" rel="stylesheet">
+    <link href="/frontend/src/styles/modify.css" rel="stylesheet">
 </head>
-<body class="container-fluid scroll-y">
-    <div class="bg-danger justify-content-center px-2 m-1 orders-header">
-        <nav class="d-flex flex-column">
-            <span class="d-flex justify-content-center mt-1 display-6">Ordering</span>
-            <ul class="nav nav-pills">
-                <li class="nav-item"></li>
-                    <a href="./orders.html">
-                        <button class="nav-item btn btn-primary text-dark m-1 mb-2">Order Here</button>
-                    </a>
-                </li> 
-                <li class="nav-item"></li>
-                    <a href="./orders.html">
-                        <button class="nav-item btn btn-primary text-dark m-1 mb-2">Pending Confirmation</button>
-                    </a>
-                </li>
-                <li class="nav-item"></li>
-                    <a href="./orders.html">
-                    <button class="nav-item btn btn-primary text-dark m-1 mb-2">Confirmed Orders</button>
-                    </a>
-                </li>
-                <!--Replace li groupings for removing bullets-->
-                <!--Add borders-->
-                <!--Supposed to be a frontend intervention to replace the whole row and not go to another page. Replace <anchor>-->
-            </ul>
-        </nav>
-    </div>
-    <div class="text-light orders-body">
-        <div class="d-flex flex-column align-content-center bg-primary m-1 orders-body-list" >
-            <!--Input orders list here-->
-            <div id="table-header">
-                <h4>Manage Orders</h4>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-bordered w-100" id="orders-body-table">
-                    <thead>
-                        <th>Order ID</th>
-                        <th>Category</th>
-                        <th>Generic Name</th>
-                        <th>Branded Name</th>
-                        <th>Unit</th>
-                        <th>Cost</th>
-                        <th style="width: 100px">Action</th>
-                    </thead>
-                    <tbody>
-                        <!--Insert Table Rows here-->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!--Add class for scrolling ul that will only appear when first span exceeds the area -->
-        <div class="bg-primary m-1 scroll-y orders-body-checked">
-            <div class="container justify-content-center m-2 gap-4 text-dark orders-calculation">
+<body>
+    <div class="container-fluid d-flex flex-column">
+        <div class="container-orders">
+            <div class="p-1 navbar-orders">
                 <div class="row">
-                    <div class="col col-md-4 d-flex justify-content-center">Generic</div>
-                    <div class="col col-md-3 d-flex justify-content-center">Branded</div>
-                    <div class="col col-md-2 d-flex justify-content-center">Qty</div>
-                    <div class="col col-md-3 d-flex justify-content-center">Total Cost</div>
+                    <div class="col-9">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href=""><i class="bi bi-box-seam me-2"></i>Order Here</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="">
+                                    <i class="bi bi-box-seam me-2"></i>Pending Confirmation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="">
+                                    <i class="bi bi-box-seam me-2"></i>Confirmed Orders</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3 d-flex justify-content-end menu-orders">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/frontend/public/main.html">
+                                    <i class="bi bi-house-check me-2"></i>Home</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="row checked-items">
-                    <!--Insert Checked Boxes here-->
-                </div>
-            <div class="line mt-1"></div>
+            </div>
+            <div class="p-1 body-orders">
+                <div class="row container-orders-body">
+                    <div class="col-8 d-flex flex-column align-content-center bg-primary m-1 body-orders-list" >
+                        <div class="table-responsive mt-1">
+                            <table class="table table-bordered w-100" id="orders-body-table">
+                                <thead>
+                                    <th>Order ID</th>
+                                    <th>Category</th>
+                                    <th>Generic Name</th>
+                                    <th>Branded Name</th>
+                                    <th>Unit</th>
+                                    <th>Cost</th>
+                                    <th style="width: 100px">Action</th>
+                                </thead>
+                                <tbody>
+                                    <!--Insert Table Rows here-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--Add class for scrolling ul that will only appear when first span exceeds the area -->
+                    <div class="col 4 bg-primary m-1 scroll-y orders-body-checked">
+                        <div class="container justify-content-center m-2 gap-4 text-dark orders-calculation">
+                            <div class="row">
+                                <div class="col col-md-4 d-flex justify-content-center">Generic</div>
+                                <div class="col col-md-3 d-flex justify-content-center">Branded</div>
+                                <div class="col col-md-2 d-flex justify-content-center">Qty</div>
+                                <div class="col col-md-3 d-flex justify-content-center">Total Cost</div>
+                            </div>
+                            <div class="row checked-items">
+                                <!--Insert Checked Boxes here-->
+                            </div>
+                        </div>
+                        
+                        <div class="line mt-1"></div>
 
-            <div class="container m-2 gap-4 text-dark orders-final">
-                <div class="row">
-                    <div class="col col-md-9 d-flex justify-content-end">Total Cost</div>
-                    <div class="col col-md-3 d-flex justify-content-center" id="orders-sum">Amount</div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-danger m-1 cancel">Cancel</button>
-                    <button type="button" class="btn btn-success m-1 submit">Submit</button>
+                        <div class="container m-2 gap-4 text-dark orders-final">
+                            <div class="row">
+                                <div class="col col-md-9 d-flex justify-content-end">Total Cost</div>
+                                <div class="col col-md-3 d-flex justify-content-center" id="orders-sum">Amount</div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-danger m-1 cancel">Cancel</button>
+                                <button type="button" class="btn btn-success m-1 submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- Footer
+            <div>
+                
+                <div class="footer-orders"></div>
+                
+            </div>
+            -->
         </div>
     </div>
-<script src="./js/jquery.js"></script>
-<script type="module" src="./js/common.js"></script>
-<script type="module" src="./js/orders.js"></script>
+<script src="/frontend/public/jquery.js"></script>
+<script type="module" src="/frontend/src/pages/orders.js"></script>
+<script type="module" src="/frontend/src/"></script>
 </body>
 </html>

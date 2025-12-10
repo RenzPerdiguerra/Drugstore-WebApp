@@ -1,3 +1,5 @@
+
+/* || Root Variables */
 :root {
   --font-title: clamp(1.5rem, 3vw, 3rem);
   --space-xs: clamp(.3rem, .75vw, 1rem);
@@ -5,217 +7,95 @@
   --space-md: clamp(1rem, 2vw, 2rem);
 }
 
-header {
-  position: fixed;
-  width: 100%;
-  display: block;
-  background-color: yellow;
-  text-align: center;
-  font-size: 27px;
-  padding: 10px;
-  height: 88px;
-  z-index: 1000;
+/* || Reset and Base */
+
+/* || Layout Utilities */
+body {
+    background-image: url("/frontend/public/images/login_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-header > .header-name{
-  flex:content;
-  justify-content: center;
-  position: fixed;
-  font-size:xx-large;
+.container-fluid {
+    margin-top: 3vh;
+    width: 85vw;
+    height: 92vh;
+    background-color: rgb(52, 86, 240);
+    box-shadow: rgb(0, 0, 0.2);
+    display: flex;
+    justify-content: center;
 }
 
-button[class="insert-btn btn-danger btn-sm"] {
-  position: fixed;
-  right: 10px;
-  background-color: #32CD32;
-  color: whitesmoke;
-  padding: 6px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 2px 4px;
-  cursor: pointer;
-  border-radius: 6px;
+.container-homepage {
+    margin-top: 7vh;
+    height: 70vh; 
+    width: 65vw;
+    background-color: rgb(52, 86, 240);
 }
 
-header .header-searchbar {
-  position: fixed;
-  right: 0px;
-  top: 50px;
-  margin: 4px;
-  font-size: small;
-  font-weight: 600;
+.container-products {
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+}
+
+.container-orders{
+    display: grid;
+    grid-template-rows: .5fr 9.5fr;
+}
+
+.container-orders-body {
+    width: 84vw;
+    height: 82vh;
+    background-color: rgb(52, 86, 240);
+}
+
+.table-responsive {
+    overflow: auto;
+    max-width: 95%;
+    margin-left: 1rem;
+}
+
+.navbar-home{
+    padding: 2px;
+    margin: 10px 10px;
+    height: 67vh; 
+    width: 250px;    
+}
+
+.homepage-announcement {
+    padding: 10px;
+    margin: 10px 10px;
+    margin-left: 1px;
+    height: 67vh; 
+    width: 750px;
+    background-color: aliceblue;
 }
 
 .scroll-y {
-  overflow-y: scroll;
-  height: 400px;
+    overflow-y: auto;
 }
 
-.sidebar {
-  position: fixed;
-  left: 0px; 
-  top: 12vh;
-  width: 27vh;
-  height: 45vh;
-  background-color: rgb(from black r g b); /*  */
-  color: white;
-  padding: 12px;
-  border: 1px solid black;
-  justify-content: center;
+/* || Components */
+.line {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    height: 2px;
+    background-color: #333;
 }
 
-.sidebar-header {
-  padding: 0px;
-  margin-left: 7px;
+input:invalid {
+    border-color: red;
 }
 
-.sidebar-menu {
-  list-style-type: none;
-  padding-top: 0px;
-  padding-left: 8px;
+input:valid {
+    border-color: green;
 }
-
-.sidebar-menu li{
-  padding: 2px;
-  padding-left: 10px;
-  font-size: large;
-  border: 1px solid black;
-}
-
-#products-list {
-  position: absolute;
-  top: 12vh;
-  left: 30vh;
-  background-color: aliceblue;
-}
-
-.insertProductTrigger {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #3c9e53;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none !important;
-}
-
-#modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* grayscale effect */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#modalContent {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-#productForm {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-}
-
-#productForm-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px;
-  margin-top: 0px;
-  text-align: center;
-}
-
-.form-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.form-row label {
-  flex: 0 0 150px; /* fixed width for label */
-  font-weight: bold;
-}
-
-.form-row input,
-.form-row select {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#saveProductBtn,
-#closeModalBtn {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.save {
-    margin-left: 150px;
-}
-
-.cancel {
-  margin-left: 30px;
-  background-color: #dc3545 !important; /* Red color for cancel button */
-  margin-left: 10px; /* Space between buttons */
-}
-
-/* orders page */
-
-.container-fluid {
-    position: fixed;
-    display: grid;
-    grid-template-rows: 1fr 9fr;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: black ;
-}
-
-#orders-body {
-    display: grid;
-    grid-template-columns: 4.5fr 1.5fr;
-    grid-template-rows: minmax(10vh, 90vh);
-}
-
-#orders-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-
-/*   Applied BS, search contents
-container {} - login
-container-fluid{} - index
-
-/*   Other useful tools
-Z-index - third axis
-
-/*   Apply after 
-.custom-element {
-  color: color-yiq(#000); /*color orange: #fff` 
-}
-.custom-element {
-  color: color-yiq(theme-color("dark")); // returns `color: #fff`
-}
-*/
+/* || Page Styles */
+/* || Utilities */

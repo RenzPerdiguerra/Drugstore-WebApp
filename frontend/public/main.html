@@ -8,36 +8,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel='stylesheet' type="text/css" href="/ui/css/main.css">
+    <link rel='stylesheet' type="text/css" href="/frontend/src/styles/modify.css">
 </head>
 <body>
-    <div id="homepage" class="d-flex flex-row align-items-center justify-content-center">
-    <!-- Navbar -->
-        <nav id="navbar-service" class="navbar-light bg-light d-flex align-items-start flex-column p-4">
-            <span class="navbar-brand mb-3">Choose your service</span>
-        <!-- Service Links -->
-            <ul class="nav nav-pills w-100 flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="/ui/manage-product.html"><i class="bi bi-box-seam me-2"></i>Products List</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="#"><i class="bi bi-bag-check me-2"></i>Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="#"><i class="bi bi-archive me-2"></i>Stockroom</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="#"><i class="bi bi-graph-up me-2"></i>Analytics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="#"><i class="bi bi-people me-2"></i>Employees</a>
-                </li>
-            </ul>
-        </nav>
-        <div id="announcement" class="container">
-            <span>Announcements:</span>
+    <div class="container-homepage">
+        <div class="d-flex align-items-center justify-content-center">
+        <!-- Navbar -->
+            <nav class="navbar-light bg-light d-flex align-items-start flex-column p-4 navbar-home">
+                <span class="navbar-brand mb-3">Choose your service</span>
+            <!-- Service Links -->
+                <ul class="nav nav-pills w-100 flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="/frontend/public/products.html"><i class="bi bi-box-seam me-2"></i>Products List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#"><i class="bi bi-bag-check me-2"></i>Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#"><i class="bi bi-archive me-2"></i>Stockroom</a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#"><i class="bi bi-graph-up me-2"></i>Analytics</a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#"><i class="bi bi-people me-2"></i>Employees</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="homepage-announcement">
+                <span>Announcements:</span>
+        </div>
     </div>
-
 <!-- Bootstrap JS (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
