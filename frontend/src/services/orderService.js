@@ -1,3 +1,36 @@
+export function showSelectedOrdersSection() {
+    $('.orders-sections .nav-item').on('click', function (e) {
+        e.preventDefault();
+
+        $('.orders-sections .nav-link').removeClass('active');
+
+        $(this).find('.nav-link').addClass('active');
+
+        const sectionName = $(this).data('section');
+
+        $('.body-orders-list, .body-pending-confirmation, .body-confirmed-orders').addClass('d-none');
+
+        if (sectionName === 'order-here') {
+            $('.body-orders-list').removeClass('d-none');
+            $('.orders-body-checked').removeClass('d-none');
+            $('.body-pending-confirmation').addClass('d-none');
+            $('.body-confirmed-orders').addClass('d-none');
+        }
+
+        if (sectionName === 'pending-confirmation') {
+            $('.body-orders-list').addClass('d-none');
+            $('.orders-body-checked').addClass('d-none');
+            $('.body-pending-confirmation').removeClass('d-none');
+        }
+
+        if (sectionName === 'confirmed-orders') {
+            $('.body-orders-list').addClass('d-none');
+            $('.orders-body-checked').addClass('d-none');
+            $('.body-confirmed-orders').removeClass('d-none');
+        }
+    });
+}
+
 // provides products for each checked rows
 export function calculateSubTotal($row) {
     const qty = parseInt($row.find('.qty-input').val()) || 1;
@@ -24,7 +57,7 @@ export function calculateTotal() {
 }
 
 // Extracts data from checked-items
-export function collectCheckedItems(){
+export function collectCheckedItems() {
     return new Promise((resolve) => {
         $(document).on('click', '.orders-final .submit', function() {
             let items = [];
@@ -52,6 +85,7 @@ export function collectCheckedItems(){
     });
 }
 
+
 // create row-level data for pending_batches
 export async function createPendingBatchesPayload() {
     const { items, grandTotal, counter} = await collectCheckedItems();
@@ -69,3 +103,4 @@ export async function createPendingBatchesPayload() {
 
     return data
 }
+

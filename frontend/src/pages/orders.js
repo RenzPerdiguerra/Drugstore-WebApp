@@ -1,8 +1,10 @@
-import {calculateTotal, collectCheckedItems} from '../services/orderService.js'
-import getOrderList, { renderCheckedItems } from '../components/orders-list.js'
+import {calculateTotal, collectCheckedItems, showSelectedOrdersSection} from '../services/orderService.js'
+import getOrderList, { renderCheckedItems } from '../components/ordersList.js'
 
 // render orders list
 getOrderList();
+
+showSelectedOrdersSection();
 
 // render row-level data to calculation table. Includes initial Orders Total
 renderCheckedItems();
@@ -10,13 +12,10 @@ renderCheckedItems();
 // Updates Orders Total when quantity is changed
 calculateTotal();
 
+/*
 // Extracts data from checked items once submitted
 collectCheckedItems().then({items, grandTotal, counter});
-
-
-
-
-
+*/
 /*
 $(document).on('click', '.submit', function (){
 

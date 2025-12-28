@@ -1,4 +1,4 @@
-import {orderApi} from '../services/orderService.js'
+import {orderApi} from '../api/api.js'
 
 // Renders order list
 export default function getOrderList() {
