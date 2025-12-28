@@ -1,27 +1,27 @@
-from ..main import bcrypt
-from ..utils.sql_connector import get_sql_connection
+from backend.extensions import bcrypt
+from backend.utils.sql_connector import get_sql_connection
 
 conn = get_sql_connection()
-
 #region DAO
 def create_user(username, password_hash):
     cur = conn.cursor()
-    query = ('INSERT INTO users (username, password_hash)'
+    query = ('INSERT INTO management.users (username, password_hash) '
              'VALUES (%s, %s) RETURNING id')
     cur.execute(query, (username, password_hash)) # check if three parameters work
     conn.commit()
     new_id = cur.fetchone()[0]
     
-    return {'id': new_id, 'username': username} # always return a dictionary
+    return {'emp_id': new_id, 'username': username} # always return a dictionary
     
 def get_user(username):
     cur = conn.cursor()
-    query = ('SELECT username FROM management.users'
-             'where username="%s" RETURNING id')
-    cur.execute(query, username)
-    user_id = cur.fetchone()[0]
-
-    return {'id': user_id}
+    query = ('SELECT * FROM management.users '
+             'where username=%s')
+    cur.execute(query, (username,))
+    result = cur.fetchone()
+    if result:
+        return {'id': result[0], 'name': result[1], 'password_hash': result[2]}
+    return None
     
 #endregion
     
@@ -32,9 +32,10 @@ def register_user(username, password):
 
 def authenticate_user(username, password):
     user = get_user(username)
-    if username and bcrypt.check_password_hash(password.encode('utf-8'), user['password_hash'].encode('utf-8')):
+    if username and bcrypt.check_password_hash(user['password_hash'], password):
         return user
-    
+
+def create_token() 
 #endregion
 
 

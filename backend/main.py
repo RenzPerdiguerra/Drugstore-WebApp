@@ -1,10 +1,8 @@
 from flask import Flask
-from flask_cors import CORS
-from flask_bcrypt import Bcrypt
+from backend.extensions import bcrypt, cors
 from backend.controller.products_controller import products_bp
-
-cors = CORS()
-bcrypt = Bcrypt()
+from backend.controller.auth_controller import auth_bp
+from backend.controller.orders_controller import orders_bp
 
 def create_app():
     app = Flask(__name__)
@@ -12,6 +10,8 @@ def create_app():
     bcrypt.init_app(app)
     
     app.register_blueprint(products_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(orders_bp)
     return app
 
 

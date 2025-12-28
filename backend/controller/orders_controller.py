@@ -1,12 +1,12 @@
-from flask import Flask, Blueprint, request, jsonify
-from flask_cors import CORS
+from flask import Blueprint, request, jsonify
 from backend.utils.sql_connector import get_sql_connection
-
-import json
 import backend.dao.orders_dao as orders_dao
 
+orders_bp = Blueprint('orders', __name__, url_prefix='/orders')
 
-@app.route('/getOrderList', methods=['GET'])
+conn = get_sql_connection()
+
+@orders_bp.route('/getOrderList', methods=['GET'])
 def getOrdersList():
     # gets order list requested
     payload = orders_dao.get_orders(conn)
@@ -14,7 +14,7 @@ def getOrdersList():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/insertOrderItem', methods=['POST'])
+@orders_bp.route('/insertOrderItem', methods=['POST'])
 def insertOrderItem():
     # adds order data
     request_payload = request.get_json()
@@ -25,7 +25,7 @@ def insertOrderItem():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/updateOrderItem', methods=['PUT'])
+@orders_bp.route('/updateOrderItem', methods=['PUT'])
 def updateOrderItem():
     # updates product list
     request_payload = request.get_json()    
@@ -35,7 +35,7 @@ def updateOrderItem():
     })
     return response
 
-@app.route('/deleteOrderItem', methods=['POST'])
+@orders_bp.route('/deleteOrderItem', methods=['POST'])
 def deleteOrderItem():
     # deletes order data
     request_payload = request.get_json()
