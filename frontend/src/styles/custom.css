@@ -41,7 +41,6 @@ body {
     height: 92vh;
     background-color: rgb(52, 86, 240);
     box-shadow: 0 0 10px rgb(0, 0, 0.2);
-    flex-direction: column;
     padding: 0;
 }
 
@@ -52,15 +51,20 @@ body {
     background-color: rgb(52, 86, 240);
 }
 
-.container-orders{
-    display: grid;
-    grid-template-rows: .5fr 9.5fr;
+.navbar-home{
+    padding: 2px;
+    margin: 10px 10px;
+    height: 67vh; 
+    width: 250px;    
 }
 
-.container-orders-body {
-    width: 84vw;
-    height: 82vh;
-    background-color: rgb(52, 86, 240);
+.homepage-announcement {
+    padding: 10px;
+    margin: 10px 10px;
+    margin-left: 1px;
+    height: 67vh; 
+    width: 750px;
+    background-color: aliceblue;
 }
 
 .container-products {
@@ -73,7 +77,7 @@ body {
 
 /* Grid children: allow overflow to be scrollable instead of expanding */
 .container-products > .row,
-.container-products > .products-body {
+.container-products > .body-products {
     min-height: 0;
 }
 
@@ -109,27 +113,31 @@ body {
     background-color: #f5f5f5;
 }
 
-.navbar-home{
-    padding: 2px;
-    margin: 10px 10px;
-    height: 67vh; 
-    width: 250px;    
+.container-orders{
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
-.homepage-announcement {
-    padding: 10px;
-    margin: 10px 10px;
-    margin-left: 1px;
-    height: 67vh; 
-    width: 750px;
-    background-color: aliceblue;
+.container-orders > .navbar-orders,
+.container-orders > .container-orders-body {
+    min-height: 0;
 }
 
+.container-orders-body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.orders-body-checked {
+    padding: 1;
+}
+
+
+/* || Components */
 .scroll-y {
     overflow-y: auto;
 }
-
-/* || Components */
 
 #insert-product-btn {
     padding: 5px;
@@ -160,5 +168,39 @@ input:invalid {
 input:valid {
     border-color: green;
 }
+
+#modalOverlay {
+    width: 100vh;
+    height: 75vh;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    display: none;
+    background: rgba(0,0,0,0.25);
+    padding: 1rem;
+    overflow-y: auto;
+    z-index: 1050;
+}
+
+#modalOverlay.show {
+    display: flex;
+    animation: modal-fade .16s ease-out;
+}
+
+/* Modal content box */
+#modalContent {
+    background: #fff;
+    border-radius: .5rem;
+    width: 100%; /* responsive width */
+    height: 100%; /* keep inside viewport */
+    overflow: auto; /* scroll inner content when needed */
+    box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.15);
+    padding: 1rem 1.25rem;
+    transform: translateY(0);
+}
 /* || Page Styles */
 /* || Utilities */
+@keyframes modal-fade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
