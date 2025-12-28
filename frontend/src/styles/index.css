@@ -7,7 +7,7 @@ html, body {
 
 /* Optional: background image styling */
 body {
-  background-image: url("/ui/images/pharmacy_bg.jpg");
+  background-image: url("/frontend/public/images/pharmacy_bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
