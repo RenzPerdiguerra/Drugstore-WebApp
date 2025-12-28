@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MelPharma</title>
-    <link rel='stylesheet' type="text/css" href="ui/css/bootstrap.css">
-    <link rel='stylesheet' type="text/css" href="ui/css/index.css">
+    <link href="/frontend/public/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/frontend/src/styles/index.css">
+    <link rel="stylesheet" type="text/css" href="/frontend/src/styles/custom.css">
+    
 </head>
 <body>
   <div class="min-vh-100 d-flex justify-content-center align-items-center">
@@ -14,20 +16,22 @@
 
       <form id="loginForm">
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" id="email" class="form-control" required>
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" id="username" class="form-control" autocomplete="username" required>
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" class="form-control" required>
+          <input type="password" name="password" id="password" class="form-control" required>
         </div>
 
         <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-success">Login</button>
-          <button type="reset" class="btn btn-danger">Clear</button>
+          <button type="button" class="btn btn-danger register">Register</button>
+          <button type="button" class="btn btn-success login">Login</button>
         </div>
       </form>
+      <!-- Error message container -->
+      <div id="errorDiv" class="text-danger mt-2"></div>
         <!--
         <div>
             <span class="remember-btn">Remember me</span>
@@ -42,5 +46,11 @@
       </div>
     </div>
   </div>
+  <div id="modalOverlay" class="hidden">
+    <div id="modalContent" class="d-flex justify-content-center m-1"></div>
+  </div>
+<script src="/frontend/public/jquery.js"></script>
+<script type="module" src="/frontend/src/components/registerForm.js"></script>
+<script type="module" src="/frontend/src/index.js"></script>
 </body>
 </html>
