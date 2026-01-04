@@ -1,6 +1,8 @@
 .venv
+*.pyc
+*.pyo
+*.pyd
 Loyverse
-backend/__pycache__
 backend/unitTest_dao.py
 backend/uom_dao.py
 ui/js/saveProductBtn.js
@@ -8,3 +10,4 @@ ui/css/login_styles.css
 ui/login.html
 toadd
 .vscode
+
