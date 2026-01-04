@@ -9,9 +9,8 @@ conn = get_sql_connection()
 @orders_bp.route('/getOrderList', methods=['GET'])
 def getOrdersList():
     # gets order list requested
-    payload = orders_dao.get_orders(conn)
-    response = jsonify(payload)
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    request_payload = orders_dao.get_orders(conn)
+    response = jsonify(request_payload)
     return response
 
 @orders_bp.route('/insertOrderItem', methods=['POST'])
@@ -22,7 +21,6 @@ def insertOrderItem():
     response = jsonify({
         'order_id' : order_id
     })
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @orders_bp.route('/updateOrderItem', methods=['PUT'])
@@ -44,5 +42,4 @@ def deleteOrderItem():
     response = jsonify({
         'order_id' : order_id
     })
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
