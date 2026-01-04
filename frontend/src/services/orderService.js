@@ -1,3 +1,5 @@
+import callApi, { authApi, orderApi } from "../api/api";
+
 export function showSelectedOrdersSection() {
     $('.orders-sections .nav-item').on('click', function (e) {
         e.preventDefault();
@@ -56,10 +58,21 @@ export function calculateTotal() {
     })
 }
 
+export function getEmployeeName() {
+    $(document).on('click', '.confirmOrdersForm', function() {
+        const form = $(this).val().toLowerCase();
+        const data = {
+            // endUserId: form.find('emp_id'), To be included as Primary key if needed
+            endUserName: form.find('[name="name"]')
+        };
+        return data
+    });
+}
+
 // Extracts data from checked-items
 export function collectCheckedItems() {
     return new Promise((resolve) => {
-        $(document).on('click', '.orders-final .submit', function() {
+        $(document).on('click', '.confirmOrdersForm', function() {
             let items = [];
             let grandTotal = 0;
             let counter = 0;
@@ -85,16 +98,19 @@ export function collectCheckedItems() {
     });
 }
 
-
 // create row-level data for pending_batches
 export async function createPendingBatchesPayload() {
     const { items, grandTotal, counter} = await collectCheckedItems();
-    const empData = ; // from management.employees table
+    const auth_response = await callApi('GET', authApi.me); // me has parameters so I should test if this works
+    const empData = await auth_response.json();
+    // getEndUserName(); delete this
+    const orders_response = await callApi('GET', orderApi.branchName);
+    const empBranchData = await orders_response.json();
     
     const data = {
         // pb_id : serial primary key
-        b_name: empData, 
-        requester: empData,
+        b_name: empData['username'],
+        requester: empBranchData['b_name'], // should I use indexing even there is only a single kvp
         items_qty: counter,
         total_cost: grandTotal,
         // created_at : timestamp default current_timestamp
