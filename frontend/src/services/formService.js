@@ -25,13 +25,9 @@ export function registerFormToJson(formSelector) {
     // creates an object for insert and edit button form values
     const form = $(formSelector);
     const data = {
-        name: form.find('[name="name"]').val(),
-        branch: form.find('[name="branch"]').val(),
-        shift: form.find('[name="shift"]').val(),
-        age: form.find('[name="age"]').val(),
-        gender: form.find('[name="gender"]').val(),
         username: form.find('[name="username"]').val(),
         password: form.find('[name="password"]').val(),
+        role: form.find('[name="role"]').val()
   };
 
     return data;
