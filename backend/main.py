@@ -18,6 +18,13 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(orders_bp)
     app.register_blueprint(emp_bp)
+    
+    # Add CSP after_request hook for localStorage security
+    @app.after_request
+    def apply_csp(response):
+        response.headers['Content-Security-Policy'] = 'default-src "self"; script-src "self"'
+        return response
+    
     return app
 
 
