@@ -8,9 +8,10 @@ def create_user(username, password_hash, role):
     query = ('INSERT INTO management.users (username, password_hash, role) '
              'VALUES (%s, %s, %s) RETURNING user_id')
     cur.execute(query, (username, password_hash, role)) # check if three parameters work
-    conn.commit()
     new_id = cur.fetchone()[0]
     
+    conn.commit()
+    cur.close()
     return {'id': new_id, 'username': username} # always return a dictionary
     
 def get_user(username):
@@ -21,6 +22,8 @@ def get_user(username):
     result = cur.fetchone()
     if result:
         return {'user_id': result[0], 'username': result[1], 'pw_hash': result[2], 'role': result[3]}
+    
+    cur.close()
     return None
 #endregion
     
