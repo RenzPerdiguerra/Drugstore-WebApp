@@ -7,24 +7,28 @@ export const productApi = {
 };
 
 export const orderApi = {
-    list: 'http://127.0.0.1:5000/orders/getOrderList',
-    save: 'http://127.0.0.1:5000/orders/insertOrderItem',
-    update: 'http://127.0.0.1:5000/orders/updateOrderItem',
-    remove: 'http://127.0.0.1:5000/orders/deleteOrderItem'
+    list: 'http://127.0.0.1:5000/orders/get-order-list',
+    save: 'http://127.0.0.1:5000/orders/insert-order-item',
+    update: 'http://127.0.0.1:5000/orders/update-order-item',
+    remove: 'http://127.0.0.1:5000/orders/delete-order-item',
+    createPendingBatch: 'http://127.0.0.1:5000/orders/create-pending-batch',
+    createConfirmedBatch: 'http://127.0.0.1:5000/orders/create-confirmed-batch'
 };
 
 export const authApi = {
     register: 'http://127.0.0.1:5000/auth/register',
-    login: 'http://127.0.0.1:5000/auth/authenticate'
+    login: 'http://127.0.0.1:5000/auth/authenticate',
+    me: 'http://127.0.0.1:5000/auth/me'
 };
 
 // Generic AJAX wrapper for sending JSON requests to the backend
-export default function callApi(method, url, data) {
+export default function callApi(method, url, data = null, headers = {}) {
     return $.ajax({
         method: method,
         url: url,
         data: data,
         contentType: 'application/json',
-        dataType: 'json'
+        dataType: 'json',
+        headers
     });
 };
