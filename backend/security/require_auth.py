@@ -16,20 +16,20 @@ def require_auth(func):
         # Verify token
         try:
             payload = decode_token(
-                current_app.config['JWT_TOKEN'],
+                token,
+                current_app.config['JWT_SECRET'],
                 current_app.config['JWT_ALGORITHM'],
-                token
                 )
         except Exception as e:
             return jsonify({'error': 'Invalid or expired token', 'detail': str(e)}), 401
         
         # Inject user info into route
-        user_id = payload.get('sub')
-        username = payload.get('')
+        user_id = payload.get('user_id')
+        username = payload.get('username')
         role = payload.get('role')
         
         # Call the route handler
-        response = func(current_user_id=user_id, current_user_role=role, *args, **kwargs)
+        response = func(current_user_id=user_id, current_username=username, current_user_role=role, *args, **kwargs)
         
         # Issue a fresh token (sliding expiration)
         refreshed = create_token(

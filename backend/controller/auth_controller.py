@@ -9,7 +9,7 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 def register():
     data = request.json
     user = register_user(data['username'], data['password'], data['role'])
-    return jsonify({'message': 'User successfully created', 'user': user}), 201 # why without parenthesis, what kind of data is this
+    return jsonify({'message': 'User successfully created', 'user': user}), 201
 
 @auth_bp.route('/authenticate', methods=['POST'])
 def authenticate():
@@ -30,7 +30,7 @@ def authenticate():
             'role': user['role']
         })
         
-        return jsonify({'access token': token}), 200
+        return jsonify({'access_token': token}), 200
     return jsonify({'message': 'Login failed'}), 401
 
 @auth_bp.route('/me', methods=['GET'])
