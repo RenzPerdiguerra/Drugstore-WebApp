@@ -57,6 +57,35 @@ def delete_order_item(conn, order_id):
     cur.close()
     return deleted_id[0] if deleted_id else None
 
+def insert_pending_batch(conn, pending_batch):
+    cur = conn.cursor()
+    data = (pending_batch['b_name'], pending_batch['requester'], pending_batch['items_qty'],
+            pending_batch['total_cost'])
+    query = ("INSERT INTO management.pending_batches"
+             "(b_name, requester, items_qty, total_cost)"
+             "VALUES (%s, %s, %s, %s) RETURNING pb_id")
+    cur.execute(query, data)
+    pb_id = cur.fetchone()[0]
+    
+    conn.commit()
+    cur.close()
+    return pb_id
+
+def insert_confirmed_batch(conn, confirmed_batch):
+    cur = conn.cursor()
+    data = (confirmed_batch['pb_id'], confirmed_batch['b_name'], confirmed_batch['requester'],
+            confirmed_batch['items_qty'], confirmed_batch['total_cost'])
+    query = ("INSERT INTO management.confirmed_batches"
+             "(pb_id, b_name, requester, items_qty, total_cost)"
+             "SELECT pb_id, b_name, requester, items_qty, total_cost"
+             "FROM management.pending_batches RETURNING cb_id")
+    cur.execute(query, data)
+    cb_id = cur.fetchone()[0]
+    
+    conn.commit()
+    cur.close()
+    return cb_id
+
 
 # UNIT TEST
 if __name__ == '__main__':

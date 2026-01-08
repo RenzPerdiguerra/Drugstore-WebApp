@@ -1,3 +1,6 @@
+import { orderApi } from "../api/api.js";
+import { showModal, hideModal } from "../utils/utility.js";
+
 // Renders order list
 export default function getOrderList() {
     $.get(orderApi.list, function (response) {
@@ -72,34 +75,36 @@ export function renderCheckedItems() {
 }
 
 // Creates a blank form requiring name of the employee ordering
-$('.orders-final .submit').on('click', function() {
-    const formHtml = `
-        <form id="ordersSubmitForm">
-            <div class="d-flex justify-content-center">Confirm Submission</div>
+export function renderSubmitForm () {
+    $('.orders-final .submit').on('click', function() {
+        const formHtml = `
+            <form id="ordersSubmitForm">
+                <div class="d-flex justify-content-center">Confirm Submission</div>
 
-            <div class="form-row m-1">
-                <label>Name: </label>
-                <select name="name" required>
-                    <option value="">-- Select Branch --</option>
-                    <option value="Mary Joy Ramos">Mary Joy Ramos</option>
-                    <option value="Kenneth Duclayan">Kenneth Duclayan</option>
-                    <option value="Judith Maycacayan">Judith Maycacayan</option>
-                    <option value="She Romano">She Romano</option>
-                    <option value="Elreen Umipig">Elreen Umipig</option>
-                    <option value="Roanne Melissa Tiongson">Roanne Melissa Tiongson</option>
-                    <option value="Renz Ian Perdiguerra">Renz Ian Perdiguerra</option>
-                    <option value="Rommel John Perdiguerra">Rommel John Perdiguerra</option>
-                    <option value="Claudine Monet Perdiguerra">Claudine Monet Perdiguerra</option>
-                </select>
-            </div>
-            
-            <button type="button" class="confirmOrdersForm m-1">Confirm</button>
-            <button type="button" class="cancelOrdersForm m-1">Cancel</button>
-        </form>
-    `;
-    showModal(formHtml);
-});
+                <div class="form-row m-1">
+                    <label>Name: </label>
+                    <select name="name" required>
+                        <option value="">-- Select Name --</option>
+                        <option value="Mary Joy Ramos">Mary Joy Ramos</option>
+                        <option value="Kenneth Duclayan">Kenneth Duclayan</option>
+                        <option value="Judith Maycacayan">Judith Maycacayan</option>
+                        <option value="She Romano">She Romano</option>
+                        <option value="Elreen Umipig">Elreen Umipig</option>
+                        <option value="Roanne Melissa Tiongson">Roanne Melissa Tiongson</option>
+                        <option value="Renz Ian Perdiguerra">Renz Ian Perdiguerra</option>
+                        <option value="Rommel John Perdiguerra">Rommel John Perdiguerra</option>
+                        <option value="Claudine Monet Perdiguerra">Claudine Monet Perdiguerra</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="confirmOrdersBtn m-1">Confirm</button>
+                <button type="button" class="cancelOrdersBtn m-1">Cancel</button>
+            </form>
+        `;
+        showModal(formHtml);
+    });
 
-$('#modalOverlay').on('click', '.cancelOrdersForm', function() {
-    hideModal();
-});
+    $('#modalOverlay').on('click', '.cancelOrdersBtn', function() {
+        hideModal();
+    });
+}

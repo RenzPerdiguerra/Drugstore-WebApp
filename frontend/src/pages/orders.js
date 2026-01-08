@@ -1,5 +1,5 @@
-import {calculateTotal, collectCheckedItems, showSelectedOrdersSection} from '../services/orderService.js'
-import getOrderList, { renderCheckedItems } from '../components/ordersList.js'
+import {calculateTotal, collectCheckedItems, confirmOrdersSubmission, showSelectedOrdersSection} from '../services/orderService.js'
+import getOrderList, { renderSubmitForm, renderCheckedItems } from '../components/ordersList.js'
 
 // render orders list
 getOrderList();
@@ -9,25 +9,14 @@ showSelectedOrdersSection();
 // render row-level data to calculation table. Includes initial Orders Total
 renderCheckedItems();
 
-// Updates Orders Total when quantity is changed
+// Update Orders Total when quantity is changed
 calculateTotal();
 
-/*
+// Render Orders submission form to get employee name
+renderSubmitForm();
+
 // Extracts data from checked items once submitted
-collectCheckedItems().then({items, grandTotal, counter});
-*/
-/*
-$(document).on('click', '.submit', function (){
+collectCheckedItems();
 
-    const orderBatchesPayload = 
-
-    const pendingBatchesPayload = 
-    // transfer sum value from another DOM function
-    // extract items from checked-items
-    // extract sum from qty-input DOM
-    // package into payload
-    // send via ajax
-    
-
-})
-*/
+// Get employee name and create pending batches payload
+confirmOrdersSubmission();
