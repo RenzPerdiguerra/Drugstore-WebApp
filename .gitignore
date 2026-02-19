@@ -3,11 +3,14 @@
 *.pyo
 *.pyd
 Loyverse
-backend/unitTest_dao.py
-backend/uom_dao.py
-ui/js/saveProductBtn.js
-ui/css/login_styles.css
-ui/login.html
+backend/tests/unitTest_dao.py
+backend/dao/uom_dao.py
+backend/dao/loyverse
+backend/controller/emp_controller.py
+backend/dao/emp_dao.py
 toadd
 .vscode
+database/table_orders.sql
+database/table_stockroom.sql
+
 
