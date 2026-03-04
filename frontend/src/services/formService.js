@@ -3,7 +3,6 @@ import callApi, {productApi} from '../api/api.js';
 
 // Creates request payload with form inputs and edit button data-id. Used parameters for accommodating product id as field extension
 function productsFormToJson(formSelector, extraFields = {}) {
-    // creates an object for insert and edit button form values
     const form = $(formSelector);
     const data = {
         category: form.find('[name="category"]').val(),
@@ -20,19 +19,19 @@ function productsFormToJson(formSelector, extraFields = {}) {
     return { ...data, ...extraFields }; // returns a merged object
 }
 
-// 
+// Submits user credentials for registration using a form
 export function registerFormToJson(formSelector) {
-    // creates an object for insert and edit button form values
     const form = $(formSelector);
     const data = {
         username: form.find('[name="username"]').val(),
         password: form.find('[name="password"]').val(),
         role: form.find('[name="role"]').val()
-  };
+    };
 
     return data;
 }
 
+// Submits user credentials for logging in using a form
 export function loginFormToJson(formSelector) {
     const form = $(formSelector);
     const data = {
@@ -64,6 +63,7 @@ export function saveEditData() {
     });
 }
 
+// Deletes a row from products table
 export function deleteRowData() {
     // Deletes nearest row data via data-id
     $(document).on("click", "#delete-btn", function (){
