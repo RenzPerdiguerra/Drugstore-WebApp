@@ -11,8 +11,12 @@ export const orderApi = {
     save: 'http://127.0.0.1:5000/orders/insert-order-item',
     update: 'http://127.0.0.1:5000/orders/update-order-item',
     remove: 'http://127.0.0.1:5000/orders/delete-order-item',
+    pendingBatchesList: 'http://127.0.0.1:5000/orders/get-pending-batches-list',
+    confirmedBatchesList: 'http://127.0.0.1:5000/orders/get-confirmed-batches-list',
+    createOrderBatch: 'http://127.0.0.1:5000/orders/create-order-batch',
     createPendingBatch: 'http://127.0.0.1:5000/orders/create-pending-batch',
-    createConfirmedBatch: 'http://127.0.0.1:5000/orders/create-confirmed-batch'
+    createConfirmedBatch: 'http://127.0.0.1:5000/orders/create-confirmed-batch',
+    exportBatch: 'http://127.0.0.1:5000/orders/export'
 };
 
 export const authApi = {
@@ -28,7 +32,7 @@ export default function callApi(method, url, data = null, headers = {}) {
         url: url,
         data: data,
         contentType: 'application/json',
-        dataType: 'json',
+        dataType: 'json', // verify what services require json, remove dataType if unnecessary
         headers
     });
 };
