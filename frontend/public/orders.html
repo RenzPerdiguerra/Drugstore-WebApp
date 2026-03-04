@@ -13,8 +13,8 @@
 <div class="container-fluid">
     <div class="container-orders">
         <div class="navbar-orders">
-            <div class="row">
-                <div class="col-9">
+            <div class="row m-1">
+                <div class="col-7">
                     <ul class="nav nav-pills orders-sections">
                         <li class="nav-item" data-section="order-here">
                             <a class="nav-link text-dark" href="#" role="button"><i class="bi bi-box-seam me-2"></i>Order Here</a>
@@ -29,7 +29,12 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-3 d-flex justify-content-end menu-orders">
+                <div class="col-5 d-flex justify-content-end menu-orders">
+                    <div class="searchbar position-relative d-flex align-items-center me-1">
+                        <label for="orders-searchbar" class="me-2">Search:</label>
+                        <input type="text" class="form-control" id="orders-search-input" placeholder="Search here...">
+                        <ul id="orders-search-suggestions" class="list-group position-absolute w-60" style="top:100%; left:0; z-index:1000;"></ul>
+                    </div>
                     <ul class="nav nav-pills">
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/frontend/public/main.html">
@@ -39,10 +44,11 @@
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center container-orders-body">
-            <div class="col-8 d-flex flex-column align-content-center bg-primary me-1 body-orders-list" >
-                <div class="table-responsive mt-1">
-                    <table class="table table-bordered w-100" id="orders-body-table">
+        <!-- Orders List (Default) -->
+        <div class="d-flex justify-content-center container-orders-body">
+            <div class="col-6 d-flex flex-column align-content-center bg-primary me-1 body-orders-list" >
+                <div class="table-responsive m-1">
+                    <table class="table table-bordered w-100">
                         <thead>
                             <th>Order ID</th>
                             <th>Category</th>
@@ -59,20 +65,21 @@
                 </div>
             </div>
             <!--Add class for scrolling ul that will only appear when first span exceeds the area -->
-            <div class="col bg-primary scroll-y orders-body-checked">
-                <div class="container justify-content-center m-2 gap-4 text-dark orders-calculation">
+            <div class="col bg-primary orders-body-checked">
+                <div class="container justify-content-center text-dark orders-calculation">
                     <div class="row">
-                        <div class="col col-md-4 d-flex justify-content-center">Generic</div>
+                        <div class="col col-md-3 d-flex justify-content-center">Generic</div>
                         <div class="col col-md-3 d-flex justify-content-center">Branded</div>
+                        <div class="col col-md-2 d-flex justify-content-center">Unit</div>
                         <div class="col col-md-2 d-flex justify-content-center">Qty</div>
-                        <div class="col col-md-3 d-flex justify-content-center">Total Cost</div>
+                        <div class="col col-md-2 d-flex justify-content-center">Total Cost</div>
                     </div>
                     <div class="row checked-items">
                         <!--Insert Checked Boxes here-->
                     </div>
                 </div>
                 
-                <div class="line mt-1"></div>
+                <div class="mt-1 line"></div>
 
                 <div class="container m-2 gap-4 text-dark orders-final">
                     <div class="row">
@@ -85,21 +92,49 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 body-pending-confirmation d-none">
-
+        </div>
+        <!-- Pending Confirmation -->
+        <div class="secondary-sections">
+            <div class="bg-primary body-pending-confirmation d-none">
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100">
+                        <thead>
+                            <th>PB ID</th>
+                            <th>Branch Name</th>
+                            <th>Requester</th>
+                            <th>Items Qty</th>
+                            <th>Total Cost</th>
+                            <th>Created At</th>
+                            <th>Modified At</th>
+                            <th style="width: 100px">Action</th>
+                        </thead>
+                        <tbody>
+                            <!--Insert Table Rows here-->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-12 body-pending-confirmation d-none">
-                
+            <!-- Confirmed Batches -->
+            <div class="bg-primary body-confirmed-batches d-none">
+                <div class="table-responsive">
+                    <table class="table table-bordered w-100">
+                        <thead>
+                            <th>CB ID</th>
+                            <th>PB ID</th>
+                            <th>Branch Name</th>
+                            <th>Requester</th>
+                            <th>Items Qty</th>
+                            <th>Total Cost</th>
+                            <th>Confirmed At</th>
+                            <th style="width: 100px">Action</th>
+                        </thead>
+                        <tbody>
+                            <!--Insert Table Rows here-->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-
-        <!-- Footer
-        <div>
-            
-            <div class="footer-orders"></div>
-            
-        </div>
-        -->
     </div>
 </div>
 <div id="modalOverlay">
