@@ -38,8 +38,18 @@ export function formatDateLong(dateStr) {
     }).format(date);
 };
 
-// Formats date to UTC
-export function formatToRFC1123(isoDateStr) {
+// Formats date to Philippine Time
+export function formatToPhilippineTime(isoDateStr) {
     const date = new Date(isoDateStr);
-    return date.toUTCString();
+
+    const options = {
+      timeZone: 'Asia/Manila',
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second:'2-digit'
+    } 
+    return date.toLocaleString('en-US', options)
 };
