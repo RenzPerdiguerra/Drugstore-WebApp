@@ -1,1 +1,1 @@
-web: gunicorn backend.main:create_app()
+web: gunicorn wsgi:app
