@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from backend.extensions import bcrypt, cors
 from backend.controller.products_controller import products_bp
 from backend.controller.auth_controller import auth_bp
@@ -18,6 +18,10 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(orders_bp)
     app.register_blueprint(emp_bp)
+    
+    @auth_bp.route('/')
+    def index():
+        return render_template('index.html')
     
     # Add CSP after_request hook for localStorage security
     @app.after_request
