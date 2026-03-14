@@ -1,5 +1,14 @@
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+from flask_talisman import Talisman
 
 cors = CORS()
+
+talisman = Talisman()
+csp = {
+    'default-src': "'self'",
+    'style-src': ["'self'", "'unsafe-inline'"],
+    'script-src': ["'self'", "'unsafe-inline'"],
+}
+
 bcrypt = Bcrypt()
