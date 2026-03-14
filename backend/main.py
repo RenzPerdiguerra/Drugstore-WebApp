@@ -1,6 +1,6 @@
 from flask import Flask, send_from_directory
 import os
-from backend.extensions import bcrypt, cors, csp, talisman
+from backend.extensions import bcrypt, cors, prod_csp, dev_csp, talisman
 from backend.controller.products_controller import products_bp
 from backend.controller.auth_controller import auth_bp
 from backend.controller.orders_controller import orders_bp
@@ -13,9 +13,13 @@ def create_app():
     )
     
     # Extensions init
-    talisman.init_app(app, content_security_policy=csp)
     cors.init_app(app)
     bcrypt.init_app(app)
+    is_prod = os.environ.get('RENDER', False)  # Render sets this automatically
+    if is_prod:
+        talisman.init_app(app, content_security_policy=prod_csp, force_https=True)
+    else:
+        talisman.init_app(app, content_security_policy=dev_csp, force_https=False)
     
     # JWT config
     app.config['JWT_SECRET'] = 'replace_with_a_long_random_secret'
