@@ -26,18 +26,11 @@ def create_app():
     app.config['JWT_ALGORITHM'] = 'HS256'
     app.config['JWT_ACCESS_TTL_MINUTES'] = 60  # token lifetime
     
-    # Add CSP after_request hook for localStorage security
-    @app.after_request
-    def apply_csp(response):
-        response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'"
-        return response
-    
     # Register controller blueprints
     app.register_blueprint(products_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(orders_bp)
     app.register_blueprint(emp_bp)
-    
     
     # Serve index.html at root
     @app.route('/')
