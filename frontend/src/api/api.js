@@ -1,38 +1,46 @@
 // RESTful endpoints for listing, saving, updating, and deleting products
+const IS_PROD = window.location.hostname !== 'localhost' &&
+                window.location.hostname !== '127.0.0.1'
+
+const BASE_URL = IS_PROD
+    ? 'https://drugstore-webapp.onrender.com'
+    : 'http://127.0.0.1:5000'
+
 export const productApi = {
-    list: 'http://127.0.0.1:5000/products/getProducts',
-    save: 'http://127.0.0.1:5000/products/insertProduct',
-    update: 'http://127.0.0.1:5000/products/updateProduct',
-    remove: 'http://127.0.0.1:5000/products/deleteProduct'
-};
+    list:   `${BASE_URL}/products/getProducts`,
+    save:   `${BASE_URL}/products/insertProduct`,
+    update: `${BASE_URL}/products/updateProduct`,
+    remove: `${BASE_URL}/products/deleteProduct`
+}
 
 export const orderApi = {
-    list: 'http://127.0.0.1:5000/orders/get-order-list',
-    save: 'http://127.0.0.1:5000/orders/insert-order-item',
-    update: 'http://127.0.0.1:5000/orders/update-order-item',
-    remove: 'http://127.0.0.1:5000/orders/delete-order-item',
-    pendingBatchesList: 'http://127.0.0.1:5000/orders/get-pending-batches-list',
-    confirmedBatchesList: 'http://127.0.0.1:5000/orders/get-confirmed-batches-list',
-    createOrderBatch: 'http://127.0.0.1:5000/orders/create-order-batch',
-    createPendingBatch: 'http://127.0.0.1:5000/orders/create-pending-batch',
-    createConfirmedBatch: 'http://127.0.0.1:5000/orders/create-confirmed-batch',
-    exportBatch: 'http://127.0.0.1:5000/orders/export'
-};
+    list:                 `${BASE_URL}/orders/get-order-list`,
+    save:                 `${BASE_URL}/orders/insert-order-item`,
+    update:               `${BASE_URL}/orders/update-order-item`,
+    remove:               `${BASE_URL}/orders/delete-order-item`,
+    pendingBatchesList:   `${BASE_URL}/orders/get-pending-batches-list`,
+    confirmedBatchesList: `${BASE_URL}/orders/get-confirmed-batches-list`,
+    createOrderBatch:     `${BASE_URL}/orders/create-order-batch`,
+    createPendingBatch:   `${BASE_URL}/orders/create-pending-batch`,
+    createConfirmedBatch: `${BASE_URL}/orders/create-confirmed-batch`,
+    exportBatch:          `${BASE_URL}/orders/export`
+}
 
 export const authApi = {
-    register: 'http://127.0.0.1:5000/auth/register',
-    login: 'http://127.0.0.1:5000/auth/authenticate',
-    me: 'http://127.0.0.1:5000/auth/me'
-};
+    register: `${BASE_URL}/auth/register`,
+    login:    `${BASE_URL}/auth/authenticate`,
+    me:       `${BASE_URL}/auth/me`
+}
 
-// Generic AJAX wrapper for sending JSON requests to the backend
+// ── Generic AJAX Wrapper ──────────────────────────────────────────────────
 export default function callApi(method, url, data = null, headers = {}) {
     return $.ajax({
-        method: method,
-        url: url,
-        data: data,
+        method,
+        url,
+        data,
         contentType: 'application/json',
         dataType: 'json', // verify what services require json, remove dataType if unnecessary
         headers
-    });
-};
+    })
+}
+
