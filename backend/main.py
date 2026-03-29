@@ -1,5 +1,6 @@
 from flask import Flask, send_from_directory
 import os
+from backend.csp_config import get_config
 from backend.extensions import bcrypt, cors, prod_csp, dev_csp, talisman
 from backend.controller.products_controller import products_bp
 from backend.controller.auth_controller import auth_bp
@@ -7,10 +8,16 @@ from backend.controller.orders_controller import orders_bp
 from backend.controller.emp_controller import emp_bp
 
 def create_app():
+    
+    BASE_DIR = os.path.dirname(__file__)
+    FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
+    
     app = Flask(__name__,
         static_folder=os.path.join(os.path.dirname(__file__), '..'),
         static_url_path=''
     )
+    cfg = get_config()
+    app.config.from_object(cfg)
     
     # Extensions init
     cors.init_app(app)
@@ -35,17 +42,19 @@ def create_app():
     # Serve index.html at root
     @app.route('/')
     def index():
-        return send_from_directory(
-            os.path.join(app.root_path, '..'),
-            'index.html'
-        )
+        return send_from_directory(FRONTEND_DIR, 'index.html')
     
     # Serve everything in public/
     @app.route('/frontend/public/<path:filename>')
     def public_files(filename):
         return send_from_directory(
-            os.path.join(os.path.dirname(__file__), '..', 'frontend', 'public'),
-            filename
+            os.path.join(FRONTEND_DIR, 'public'), filename
+            )
+        
+    @app.route('/src/<path:filename>')
+    def src_files(filename):
+        return send_from_directory(
+            os.path.join(FRONTEND_DIR, 'src'), filename
         )
     
     return app
