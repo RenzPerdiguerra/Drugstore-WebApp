@@ -10,7 +10,7 @@ from backend.controller.emp_controller import emp_bp
 def create_app():
     
     BASE_DIR = os.path.dirname(__file__)
-    FRONTENND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
+    FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend')
     
     app = Flask(__name__,
         static_folder=os.path.join(os.path.dirname(__file__), '..'),
@@ -42,17 +42,19 @@ def create_app():
     # Serve index.html at root
     @app.route('/')
     def index():
-        return send_from_directory(
-            os.path.join(app.root_path, '..'),
-            'index.html'
-        )
+        return send_from_directory(FRONTEND_DIR, 'index.html')
     
     # Serve everything in public/
     @app.route('/frontend/public/<path:filename>')
     def public_files(filename):
         return send_from_directory(
-            os.path.join(os.path.dirname(__file__), '..', 'frontend', 'public'),
-            filename
+            os.path.join(FRONTEND_DIR, 'public'), filename
+            )
+        
+    @app.route('/src/<path:filename>')
+    def src_files(filename):
+        return send_from_directory(
+            os.path.join(FRONTEND_DIR, 'src'), filename
         )
     
     return app
