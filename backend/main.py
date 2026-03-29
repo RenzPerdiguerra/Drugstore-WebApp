@@ -42,7 +42,9 @@ def create_app():
     # Serve index.html at root
     @app.route('/')
     def index():
-        return send_from_directory(FRONTEND_DIR, 'index.html')
+        return send_from_directory(
+            os.path.join(app.root_path, '..'), 'index.html'
+            )
     
     # Serve everything in public/
     @app.route('/frontend/public/<path:filename>')
