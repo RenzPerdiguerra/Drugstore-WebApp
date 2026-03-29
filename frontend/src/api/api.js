@@ -2,7 +2,7 @@
 const IS_PROD = window.location.hostname !== 'localhost' &&
                 window.location.hostname !== '127.0.0.1'
 
-const BASE_URL = IS_PROD
+export const BASE_URL = IS_PROD
     ? 'https://drugstore-webapp.onrender.com'
     : 'http://127.0.0.1:5000'
 
