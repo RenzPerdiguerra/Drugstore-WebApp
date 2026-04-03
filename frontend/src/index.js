@@ -1,4 +1,4 @@
-import callApi, {authApi} from "./api/api.js";
+import callApi, {authApi, BASE_URL} from "./api/api.js";
 import { loginFormToJson } from "./services/formService.js";
 
 async function apiGet(path) {
@@ -50,7 +50,7 @@ function validateLoginInput() {
             localStorage.setItem('auth.jwt', jwt);
 
             if (response) { // response.success
-                window.location.href = "http://127.0.0.1:3000/frontend/public/main.html";
+                window.location.href = `${BASE_URL}/frontend/public/main.html?v=1`;
             } else {
                 alert("Login failed");
             }

@@ -2,15 +2,17 @@ import os
 
 class Config:
     """Base config shared by all environments."""
+    JWT_SECRET             = os.environ.get('JWT_SECRET')
     JWT_ALGORITHM          = os.environ.get('JWT_ALGORITHM', 'HS256')
     JWT_ACCESS_TTL_MINUTES = int(os.environ.get('JWT_ACCESS_TTL_MINUTES', 60))
-    JWT_SECRET             = os.environ.get('JWT_SECRET', 'dev_secret_only')
+
 
 class DevelopmentConfig(Config):
     """Local development settings."""
     DEBUG        = True
-    DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://localhost/mp')
+    DATABASE_URL = os.environ.get('DATABASE_URL')
     CORS_ORIGINS = ['http://localhost:5500', 'http://127.0.0.1:5500',
+                    'http://localhost:3000','http://127.0.0.1:3000',
                     'http://localhost:5000', 'http://127.0.0.1:5000']
 
 class ProductionConfig(Config):

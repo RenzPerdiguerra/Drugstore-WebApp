@@ -3,21 +3,67 @@ from flask_cors import CORS
 from flask_talisman import Talisman
 
 cors = CORS()
+bcrypt = Bcrypt()
 
+# CSP Config
 talisman = Talisman()
 
-prod_csp = {
-    'default-src': "'self'",
-    'style-src': ["'self'", "'unsafe-inline'"],
-    'script-src': ["'self'", "'unsafe-inline'"],
-    'connect-src': ["'self'", "https://drugstore-webapp.onrender.com"],
-}
+CDN_STYLES  = [
+    "'self'",
+    "'unsafe-inline'",
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com",
+    "https://fonts.googleapis.com",
+]
+
+CDN_SCRIPTS = [
+    "'self'",
+    "'unsafe-inline'",
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com",
+    "https://code.jquery.com",
+]
+
+CDN_FONTS = [
+    "'self'",
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://cdn.jsdelivr.net",
+    "data:",
+]
+
+CDN_IMAGES = [
+    "'self'",
+    "data:",
+    "blob:",
+]
 
 dev_csp = {
     'default-src': "'self'",
-    'style-src': ["'self'", "'unsafe-inline'"],
-    'script-src': ["'self'", "'unsafe-inline'"],
-    'connect-src': ["'self'", "http://127.0.0.1:5000", "http://localhost:5000"],
+    'style-src'  : CDN_STYLES,
+    'script-src' : CDN_SCRIPTS,
+    'font-src'   : CDN_FONTS,
+    'img-src'    : CDN_IMAGES,
+    'connect-src': [
+        "'self'",
+        "https://cdn.jsdelivr.net",
+        "http://127.0.0.1:5000",
+        "http://localhost:5000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+    ]
 }
 
-bcrypt = Bcrypt()
+prod_csp = {
+    'default-src': "'self'",
+    'style-src'  : CDN_STYLES,
+    'script-src' : CDN_SCRIPTS,
+    'font-src'   : CDN_FONTS,
+    'img-src'    : CDN_IMAGES,
+    'connect-src': [
+        "'self'",
+        "https://drugstore-webapp.onrender.com",
+    ]
+}
