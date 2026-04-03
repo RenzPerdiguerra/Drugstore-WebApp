@@ -4,39 +4,40 @@ from flask_talisman import Talisman
 
 cors = CORS()
 bcrypt = Bcrypt()
-talisman = Talisman()
 
+# CSP Config
+talisman = Talisman()
 
 CDN_STYLES  = [
     "'self'",
     "'unsafe-inline'",
-    "https://cdn.jsdelivr.net",        # Bootstrap CSS
-    "https://cdnjs.cloudflare.com",    # other CDN styles
-    "https://fonts.googleapis.com",    # Google Fonts CSS
+    "https://cdn.jsdelivr.net",
+    "https://cdnjs.cloudflare.com",
+    "https://fonts.googleapis.com",
 ]
 
 CDN_SCRIPTS = [
     "'self'",
     "'unsafe-inline'",
-    "https://cdn.jsdelivr.net",        # Bootstrap JS
+    "https://cdn.jsdelivr.net",
     "https://cdnjs.cloudflare.com",
-    "https://code.jquery.com",         # jQuery
+    "https://code.jquery.com",
 ]
 
 CDN_FONTS = [
     "'self'",
     "https://fonts.googleapis.com",
-    "https://fonts.gstatic.com",       # actual font files served from here
+    "https://fonts.gstatic.com",
+    "https://cdn.jsdelivr.net",
     "data:",
 ]
 
 CDN_IMAGES = [
     "'self'",
-    "data:",                           # base64 images
-    "blob:",                           # blob URLs
+    "data:",
+    "blob:",
 ]
 
-# ── Dev CSP ───────────────────────────────────────────────────────────────
 dev_csp = {
     'default-src': "'self'",
     'style-src'  : CDN_STYLES,
@@ -45,16 +46,16 @@ dev_csp = {
     'img-src'    : CDN_IMAGES,
     'connect-src': [
         "'self'",
-        "http://127.0.0.1:5000",       # Flask backend
+        "https://cdn.jsdelivr.net",
+        "http://127.0.0.1:5000",
         "http://localhost:5000",
-        "http://127.0.0.1:3000",       # frontend dev server
+        "http://127.0.0.1:3000",
         "http://localhost:3000",
-        "http://127.0.0.1:5500",       # VS Code Live Server
+        "http://127.0.0.1:5500",
         "http://localhost:5500",
     ]
 }
 
-# ── Prod CSP ──────────────────────────────────────────────────────────────
 prod_csp = {
     'default-src': "'self'",
     'style-src'  : CDN_STYLES,
