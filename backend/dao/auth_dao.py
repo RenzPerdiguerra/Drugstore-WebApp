@@ -21,6 +21,7 @@ def get_user(username):
     cur.execute(query, (username,))
     result = cur.fetchone()
     if result:
+        cur.close()
         return {'user_id': result[0], 'username': result[1], 'pw_hash': result[2], 'role': result[3]}
     
     cur.close()
@@ -41,4 +42,3 @@ def authenticate_user(username, password):
 
 if __name__ == "__main__":
     conn = get_sql_connection()
-    print(register_user('ssrenzp', 'mayday09', 'admin'))
