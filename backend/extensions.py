@@ -62,8 +62,9 @@ prod_csp = {
     'script-src' : CDN_SCRIPTS,
     'font-src'   : CDN_FONTS,
     'img-src'    : CDN_IMAGES,
-    'connect-src': [
+    'connect-src': [ 
         "'self'",
         "https://drugstore-webapp.onrender.com",
-    ]
+        "https://cdn.jsdelivr.net"
+                    ]
 }
