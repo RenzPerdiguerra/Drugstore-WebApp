@@ -118,7 +118,7 @@ export function getPendingBatches() {
             var table = '';
             $.each(response, function (index, order) {
                 table += '<tr data-id="' + order.pb_id + 
-                    '" data-b-name= "' + order.b_name +
+                    '" data-b-name= "' + order.branch_name +
                     '" data-requester="' + order.requester +
                     '" data-items-qty="' + order.items_qty +
                     '" data-total-cost="' + order.total_cost +
@@ -128,7 +128,7 @@ export function getPendingBatches() {
                         '<span class="me-2">' + order.pb_id + '</span>' +
                         '<button class="btn btn-sm btn-link dropdown-toggle" id="pb-caret-btn">' +
                     '</td>' +
-                    '<td>' + order.b_name + '</td>' +
+                    '<td>' + order.branch_name + '</td>' +
                     '<td>' + order.requester + '</td>' +
                     '<td>' + order.items_qty + '</td>' +
                     '<td>' + order.total_cost + '</td>' +
@@ -158,7 +158,7 @@ export function renderPendingBatchesItemsForm() {
                 table += '<tr data-id="' + order.order_id + 
                     '" data-category= "' + order.category +
                     '" data-gname="' + order.g_name +
-                    '" data-bname="' + order.b_name +
+                    '" data-bname="' + order.branch_name +
                     '" data-unit="' + order.uom +
                     '" data-cost="' + order.cost + '">' +
                     '<td>' + order.order_id + '</td>' +
@@ -189,14 +189,14 @@ export function getConfirmedBatches() {
             $.each(response, function (index, order) {
                 table += '<tr data-id="' + order.cb_id +
                     '" data-pb-id="' + order.pb_id +
-                    '" data-b-name= "' + order.b_name +
+                    '" data-b-name= "' + order.branch_name +
                     '" data-requester="' + order.requester +
                     '" data-items-qty="' + order.items_qty +
                     '" data-total-cost="' + order.total_cost +
                     '" data-confirmed-at="' + order.confirmed_at + '">' +
                     '<td>' + order.cb_id + '</td>' +
                     '<td>' + order.pb_id + '</td>' +
-                    '<td>' + order.b_name + '</td>' +
+                    '<td>' + order.branch_name + '</td>' +
                     '<td>' + order.requester + '</td>' +
                     '<td>' + order.items_qty + '</td>' +
                     '<td>' + order.total_cost + '</td>' +
