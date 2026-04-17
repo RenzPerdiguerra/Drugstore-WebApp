@@ -14,23 +14,13 @@ $(function () {
                     '" data-category="' + product.category +
                     '" data-gname="' + product.g_name +
                     '" data-bname="' + product.b_name +
-                    '" data-datearrived="' + product.d_arrived +
-                    '" data-dateexpired="' + product.d_exp +
                     '" data-cost="' + product.cost +
-                    '" data-price="' + product.price +
-                    '" data-stock="' + product.stock +
-                    '" data-stockstatus="' + product.stock_status +
                     '" data-createdat="' + product.created_at + '">' +
                     '<td>' + product.prod_id + '</td>' +
                     '<td>' + product.category + '</td>' +
                     '<td>' + product.g_name + '</td>' +
                     '<td>' + product.b_name + '</td>' +
-                    '<td>' + formatDateLong(product.d_arrived) + '</td>' +
-                    '<td>' + formatDateLong(product.d_exp) + '</td>' +
                     '<td>' + product.cost + '</td>' +
-                    '<td>' + product.price + '</td>' +
-                    '<td>' + product.stock + '</td>' +
-                    '<td>' + product.stock_status + '</td>' +
                     '<td>' +
                          // mark each row with their id for edit btn row data navigation
                         '<button class="btn btn-primary btn-sm edit-btn" id="edit-btn" data-id="' + product.prod_id + '">Edit</button> '

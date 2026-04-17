@@ -16,18 +16,13 @@ def get_products(conn):
     cur.execute(query)
     
     response = []
-    for (prod_id, category, g_name, b_name, d_arrived, d_exp, cost, price, stock, stock_status, created_at) in cur:
+    for (prod_id, category, g_name, b_name, uom, cost, created_at) in cur:
         response.append({
             'prod_id': prod_id,
             'category': category,
             'g_name': g_name,
             'b_name': b_name,
-            'd_arrived': d_arrived,
-            'd_exp': d_exp,
             'cost': cost,
-            'price': price,
-            'stock': stock,
-            'stock_status': stock_status,
             'created_at': created_at
         })
         
@@ -36,12 +31,10 @@ def get_products(conn):
 
 def insert_product(conn, products):
     cur = conn.cursor()
-    data = (products['category'], products['g_name'], products['b_name'],
-            products['d_arrived'], products['d_exp'], products['cost'], products['price'],
-            products['stock'], products['stock_status'])
+    data = (products['category'], products['g_name'], products['b_name'], products['cost'])
     query = ("INSERT INTO management.products "
-             "(category, g_name, b_name, d_arrived, d_exp, cost, price, stock, stock_status) "
-             "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) "
+             "(category, g_name, b_name, cost) "
+             "VALUES (%s, %s, %s, %s) "
              "RETURNING prod_id")
     cur.execute(query, data)
     prod_id = cur.fetchone()[0]
@@ -52,12 +45,9 @@ def insert_product(conn, products):
 
 def update_product(conn, products):
     cur = conn.cursor()
-    data = (products['category'],products['g_name'], products['b_name'],
-            products['d_arrived'], products['d_exp'], products['cost'], products['price'],
-            products['stock'], products['stock_status'], products['prod_id'])
+    data = (products['category'],products['g_name'], products['b_name'], products['cost'], products['prod_id'])
     query = ("UPDATE management.products "
-             "SET category = %s, g_name = %s, b_name = %s, d_arrived = %s, d_exp = %s, "
-             "cost = %s, price = %s, stock = %s, stock_status = %s "
+             "SET category = %s, g_name = %s, b_name = %s, cost = %s "
              "WHERE prod_id= %s RETURNING prod_id")
     cur.execute(query, data)
     updated_id = cur.fetchone()

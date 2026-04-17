@@ -1,5 +1,5 @@
 import {calculateTotal, collectCheckedItems, confirmOrdersSubmission, confirmPendingBatch, exportOrderBatchCsv, showSelectedOrdersSection} from '../services/orderService.js'
-import getOrderList, { getPendingBatches, getConfirmedBatches, renderSubmitForm, renderCheckedItems } from '../components/ordersList.js'
+import getOrderList, { getPendingBatches, getConfirmedBatches, renderSubmitForm, renderCheckedItems } from '../components/ordersForm.js'
 
 // render orders list
 getOrderList();

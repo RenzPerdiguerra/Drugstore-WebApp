@@ -81,7 +81,7 @@ def insert_pending_batch(conn, pending_batch):
     data = (pending_batch['branch_name'], pending_batch['requester'], pending_batch['items_qty'],
             pending_batch['total_cost'])
     query = ("INSERT INTO management.pending_batches"
-             "(b_name, requester, items_qty, total_cost)"
+             "(branch_name, requester, items_qty, total_cost)"
              "VALUES (%s, %s, %s, %s) RETURNING pb_id")
     cur.execute(query, data)
     pb_id = cur.fetchone()[0]
@@ -96,10 +96,10 @@ def get_pending_batches(conn):
     cur.execute(query)
 
     response = []
-    for (pb_id, b_name, requester, items_qty, total_cost, created_at, modified_at) in cur:
+    for (pb_id, branch_name, requester, items_qty, total_cost, created_at, modified_at) in cur:
         response.append({
             'pb_id': pb_id,
-            'b_name': b_name,
+            'branch_name': branch_name,
             'requester': requester,
             'items_qty': items_qty,
             'total_cost': total_cost,
@@ -113,8 +113,8 @@ def get_pending_batches(conn):
 def insert_confirmed_batch(conn, pb_id):
     cur = conn.cursor()
     query = ("INSERT INTO management.confirmed_batches "
-             "(pb_id, b_name, requester, items_qty, total_cost) "
-             "SELECT pb_id, b_name, requester, items_qty, total_cost "
+             "(pb_id, branch_name, requester, items_qty, total_cost) "
+             "SELECT pb_id, branch_name, requester, items_qty, total_cost "
              "FROM management.pending_batches WHERE pb_id = %s "
              "RETURNING cb_id;")
     cur.execute(query, (pb_id,))
@@ -130,11 +130,11 @@ def get_confirmed_batches(conn):
     cur.execute(query)
 
     response = []
-    for (cb_id, pb_id, b_name, requester, items_qty, total_cost, confirmed_at) in cur:
+    for (cb_id, pb_id, branch_name, requester, items_qty, total_cost, confirmed_at) in cur:
         response.append({
             'cb_id': cb_id,
             'pb_id': pb_id,
-            'b_name': b_name,
+            'branch_name': branch_name,
             'requester': requester,
             'items_qty': items_qty,
             'total_cost': total_cost,

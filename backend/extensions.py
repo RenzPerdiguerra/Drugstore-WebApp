@@ -66,5 +66,5 @@ prod_csp = {
         "'self'",
         "https://drugstore-webapp.onrender.com",
         "https://cdn.jsdelivr.net"
-                    ]
+    ]
 }

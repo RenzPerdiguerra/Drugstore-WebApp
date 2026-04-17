@@ -2,14 +2,14 @@ import callApi, {authApi, BASE_URL} from "./api/api.js";
 import { loginFormToJson } from "./services/formService.js";
 
 async function apiGet(path) {
-    const token = localStorage.getItem('auth.jwt') || '';
+    const token = localStorage.getItem('token') || '';
     const res = await fetch(path, {
         headers: { Authorization: `Bearer ${token}` }
     });
 
     const refreshed = res.headers.get('X-Refreshed-Token');
     if (refreshed) {
-        localStorage.setItem('auth.jwt', refreshed);
+        localStorage.setItem('token', refreshed);
     }
 
     if (!res.ok) {
@@ -47,7 +47,7 @@ function validateLoginInput() {
                 "POST", authApi.login, JSON.stringify({ username, password })
                 );
             const jwt = response['access_token'];
-            localStorage.setItem('auth.jwt', jwt);
+            localStorage.setItem('token', jwt);
 
             if (response) { // response.success
                 window.location.href = `${BASE_URL}/frontend/public/main.html?v=1`;
@@ -63,7 +63,7 @@ function validateLoginInput() {
 }
 
 function provideToken() {
-    const token = localStorage.getItem('auth.jwt');
+    const token = localStorage.getItem('token');
     if (!token) return;
 
     try {
@@ -73,12 +73,12 @@ function provideToken() {
             if (payload && payload.exp && payload.exp > now) {
                 loadMe();
             } else {
-                localStorage.removeItem('auth.jwt');
+                localStorage.removeItem('token');
             }
         }
     } catch (err) {
         console.error('Invalid token format:', err);
-        localStorage.removeItem('auth.jwt');
+        localStorage.removeItem('token');
     }
 }
 

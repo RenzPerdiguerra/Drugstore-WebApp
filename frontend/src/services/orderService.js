@@ -97,7 +97,7 @@ export function confirmOrdersSubmission() {
         const authResponse = await fetch(authApi.me, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('auth.jwt')},
+                'Authorization': 'Bearer ' + localStorage.getItem('token')},
                 contentType: 'application/json'
                 }
             );
@@ -149,9 +149,9 @@ export function confirmPendingBatch() {
         const authResponse = await fetch(authApi.me, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('auth.jwt')},
+                'Authorization': 'Bearer ' + localStorage.getItem('token')},
                 contentType: 'application/json'
-                }
+                }   
             );
         
         const userData = await authResponse.json();
@@ -191,7 +191,7 @@ export function exportOrderBatchCsv() {
         const authResponse = await fetch(authApi.me, {
             method: 'GET',
             headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('auth.jwt')},
+                'Authorization': 'Bearer ' + localStorage.getItem('token')},
                 contentType: 'application/json'
                 }
             );
