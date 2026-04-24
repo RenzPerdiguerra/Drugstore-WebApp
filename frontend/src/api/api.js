@@ -28,8 +28,9 @@ export const orderApi = {
 
 export const authApi = {
     register: `${BASE_URL}/auth/register`,
-    login:    `${BASE_URL}/auth/authenticate`,
-    me:       `${BASE_URL}/auth/me`
+    authenticate:    `${BASE_URL}/auth/authenticate`,
+    me:       `${BASE_URL}/auth/me`,
+    logout:   `${BASE_URL}/auth/logout`
 }
 
 // ── Generic AJAX Wrapper ──────────────────────────────────────────────────

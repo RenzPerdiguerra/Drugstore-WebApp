@@ -44,7 +44,7 @@ function validateLoginInput() {
         try {
             // Send credentials API
             const response = await callApi(
-                "POST", authApi.login, JSON.stringify({ username, password })
+                "POST", authApi.authenticate, JSON.stringify({ username, password })
                 );
             const jwt = response['access_token'];
             localStorage.setItem('token', jwt);

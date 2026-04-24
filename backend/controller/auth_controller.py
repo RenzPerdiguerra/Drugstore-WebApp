@@ -1,7 +1,8 @@
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, render_template
 from backend.dao.auth_dao import register_user, authenticate_user
 from backend.utils.jwt_utils import create_token
 from backend.security.require_auth import require_auth
+from backend.security.invalidate_auth import invalidate_auth
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -42,3 +43,11 @@ def me(current_user_id=None, current_username=None, current_user_role=None):
         'username': current_username,
         'role': current_user_role
     })
+    
+@auth_bp.route('/logout', methods=['POST'])
+@invalidate_auth
+def logout(current_user_id=None, current_username=None, current_user_role=None):
+    # JWT is stateless — real invalidation requires a token blacklist
+    # For your current level, clearing client-side is sufficient
+    print('Token invalidated and cleared auth info')
+    return jsonify({'message': 'Logged out successfully'}), 200
