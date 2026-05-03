@@ -1,17 +1,19 @@
+-- migrations/versions/V001__create_users_table.sql
 CREATE SCHEMA IF NOT EXISTS management;
 
 	-- for browser user connection
 	set search_path to management, public;
 	DROP TABLE IF EXISTS
 		users, products, orders, uom, branches, order_batches, pending_batches,
-		 confirmed_batches, order_events, employees, discounts cascade;
+		 confirmed_batches, order_events, employees cascade;
 
-	CREATE TABLE management.users (
-		id SERIAL PRIMARY KEY,
+	CREATE TABLE users (
+		user_id SERIAL PRIMARY KEY,
 		username TEXT NOT NULL UNIQUE,
 		password_hash varchar(255) NOT NULL,
+		role TEXT,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-	)
+	);
 
 	-- serves as item lists and stock management
     CREATE TABLE products (
@@ -41,7 +43,7 @@ CREATE SCHEMA IF NOT EXISTS management;
 	-- unit of measurement reference e.g. box (30's), piece, tablet, capsule
 		CREATE TABLE uom (
 		uom_id SERIAL PRIMARY KEY,
-		uom varchar(30),
+		uom varchar(30)
     );
 
 	-- drugstore branches
@@ -56,18 +58,18 @@ CREATE SCHEMA IF NOT EXISTS management;
 	-- checked out orders
 	CREATE TABLE order_batches (
 		ob_id SERIAL PRIMARY KEY,
-		category varchar(30) REFERENCES products(category),
+		category varchar(30),
 		g_name varchar(50) NOT NULL,
 		b_name varchar(50),
 		unit varchar(50),
 		cost INT not null,
-		created_at TIMESTAMP DEFAULT NOW(),
+		created_at TIMESTAMP DEFAULT NOW()
 	);
 
 	-- batch of checked out orders
 	CREATE TABLE pending_batches (
 		pb_id SERIAL PRIMARY KEY,
-		b_name text not null,
+		branch_name text not null,
 		requester TEXT not null, /* name col in employees */
 		items_qty INT not null,
 		total_cost INT not null,
@@ -79,7 +81,7 @@ CREATE SCHEMA IF NOT EXISTS management;
 	CREATE TABLE confirmed_batches (
 		cb_id SERIAL PRIMARY KEY,
 		pb_id_id INT,
-		b_name TEXT NOT NULL,
+		branch_name TEXT NOT NULL,
 		requester TEXT NOT NULL,
 		items_qty INT NOT NULL,
 		total_cost INT NOT NULL,
@@ -107,13 +109,3 @@ CREATE SCHEMA IF NOT EXISTS management;
 		date_started date,
 		date_contractEnded date
 	);
-
-	-- type of discounts management
-	CREATE TABLE discounts (
-		disc_name varchar(30),
-		value Decimal (1,2),
-		access_type varchar(14) check (access_type in('Restricted', 'Not Restricted'))
-	);
-
-
-
