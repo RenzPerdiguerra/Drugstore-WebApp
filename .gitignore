@@ -9,7 +9,9 @@ backend/dao/uom_dao.py
 backend/dao/loyverse
 toadd
 .vscode
-database/table_orders.sql
-database/table_stockroom.sql
+database/query.sql
+database/postgres.session.sql
+database/settings.json
+database/db_mngmt_schema.sql
 
 
