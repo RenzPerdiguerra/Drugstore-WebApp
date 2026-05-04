@@ -16,7 +16,7 @@ def get_products(conn):
     cur.execute(query)
     
     response = []
-    for (prod_id, category, g_name, b_name, uom, cost, created_at) in cur:
+    for (prod_id, category, g_name, b_name, cost, created_at) in cur:
         response.append({
             'prod_id': prod_id,
             'category': category,

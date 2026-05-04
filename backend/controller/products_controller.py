@@ -7,14 +7,14 @@ products_bp = Blueprint('products', __name__, url_prefix='/products')
 conn = get_sql_connection()
 
 @products_bp.route('/getProducts', methods=['GET'])
-def getProducts():
+def get_products():
     # gets product list requested
     payload = products_dao.get_products(conn)
     response = jsonify(payload)
     return response
 
 @products_bp.route('/insertProduct', methods=['POST'])
-def insertProduct():
+def insert_product():
     # adds product data 
     request_payload = request.get_json()
     prod_id = products_dao.insert_product(conn, request_payload)
@@ -24,7 +24,7 @@ def insertProduct():
     return response
 
 @products_bp.route('/updateProduct', methods=['PUT'])
-def updateProduct():
+def update_product():
     # updates product list
     request_payload = request.get_json()
     prod_id = products_dao.update_product(conn, request_payload)
@@ -34,7 +34,7 @@ def updateProduct():
     return response
 
 @products_bp.route('/deleteProduct', methods=['POST'])
-def deleteProduct():
+def delete_product():
     # deletes a single product data
     request_payload = request.get_json()
     scalar_payload = request_payload.get('product_id')

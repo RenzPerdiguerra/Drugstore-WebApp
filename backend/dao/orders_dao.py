@@ -61,7 +61,7 @@ def delete_order_item(conn, order_id):
 def insert_order_batch(conn, order_batch):
     with conn.cursor() as cur:
         data = (
-            order_batch['branch_name'], order_batch['requester'], order_batch['category'],
+            order_batch['ob_id'], order_batch['branch_name'], order_batch['category'],
             order_batch['g_name'], order_batch['b_name'], order_batch['unit'], order_batch['cost'], 
             order_batch['items_qty'], order_batch['total_cost']
             )

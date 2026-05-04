@@ -1,14 +1,14 @@
 .venv
+.vscode
 .env
 *.pyc
 *.pyo
 *.pyd
-Loyverse
+
 backend/tests/unitTest_dao.py
 backend/dao/uom_dao.py
 backend/dao/loyverse
-toadd
-.vscode
+database/loyverse
 database/query.sql
 database/postgres.session.sql
 database/settings.json
