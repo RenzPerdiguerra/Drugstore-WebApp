@@ -10,14 +10,14 @@ orders_bp = Blueprint('orders', __name__, url_prefix='/orders')
 conn = get_sql_connection()
 
 @orders_bp.route('/get-order-list', methods=['GET'])
-def getOrdersList():
+def get_orders_list():
     # gets order list requested
     request_payload = orders_dao.get_orders(conn)
     response = jsonify(request_payload)
     return response, 200
 
 @orders_bp.route('/insert-order-item', methods=['POST'])
-def insertOrderItem():
+def insert_order():
     # adds order data
     request_payload = request.get_json()
     order_id = orders_dao.insert_order_item(conn, request_payload)
@@ -47,11 +47,36 @@ def delete_order_item():
     })
     return response, 201
 
-@orders_bp.route('create-order-batch', methods=['POST'])
+@orders_bp.route('/create-order-batch', methods=['POST'])
 def create_order_batch():
     request_payload = request.get_json()
     response = orders_dao.insert_order_batch(conn, request_payload)
     return jsonify({'message': 'Order Batch successfully created', 'ob_id': response}), 201
+
+@orders_bp.route('/get-order-batch', methods=['GET'])
+def get_order_batch():
+    request_payload = orders_dao.get_order_batch(conn)
+    response = jsonify(request_payload)
+    return response, 200
+
+@orders_bp.route('/update-order-batch', methods=['PUT'])
+def update_order_batch():
+    # updates product list
+    request_payload = request.get_json()    
+    ob_id = orders_dao.update_order_batch(conn, request_payload)
+    response = jsonify({
+        'ob_id' : ob_id
+    })
+    return response, 201
+@orders_bp.route('/delete-order-batch', methods=['PUT'])
+def delete_order_batch():
+    request_payload = request.get_json()
+    scalar_payload = request_payload.get('ob_id')
+    ob_id = orders_dao.delete_order_batch(conn, scalar_payload)
+    response = jsonify({
+        'ob_id' : ob_id
+    })
+    return response, 201
 
 @orders_bp.route('/create-pending-batch', methods=['POST'])
 def create_pending_batch():
@@ -66,6 +91,26 @@ def get_pending_batches_list():
     response = jsonify(request_payload)
     return response, 200
 
+@orders_bp.route('/update-pending-batch', methods=['PUT'])
+def update_pending_batch():
+    # updates product list
+    request_payload = request.get_json()    
+    pb_id = orders_dao.update_pending_batch(conn, request_payload)
+    response = jsonify({
+        'pb_id' : pb_id
+    })
+    return response, 201
+
+@orders_bp.route('/delete-pending-batch', methods=['PUT'])
+def delete_pending_batch():
+    request_payload = request.get_json()
+    scalar_payload = request_payload.get('pb_id')
+    pb_id = orders_dao.delete_pending_batch(conn, scalar_payload)
+    response = jsonify({
+        'pb_id' : pb_id
+    })
+    return response, 201
+
 @orders_bp.route('/create-confirmed-batch', methods=['POST'])
 def create_confirmed_batch():
     request_payload = request.get_json()
@@ -78,6 +123,16 @@ def get_confirmed_batches_list():
     request_payload = orders_dao.get_confirmed_batches(conn)
     response = jsonify(request_payload)
     return response, 200
+
+@orders_bp.route('/delete-confirmed-batch', methods=['PUT'])
+def delete_confirmed_batch():
+    request_payload = request.get_json()
+    scalar_payload = request_payload.get('cb_id')
+    cb_id = orders_dao.delete_confirmed_batch(conn, scalar_payload)
+    response = jsonify({
+        'cb_id' : cb_id
+    })
+    return response, 201
 
 @orders_bp.route('/export', methods=['POST'])
 def export_batch():

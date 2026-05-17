@@ -18,19 +18,25 @@ export const orderApi = {
     save:                 `${BASE_URL}/orders/insert-order-item`,
     update:               `${BASE_URL}/orders/update-order-item`,
     remove:               `${BASE_URL}/orders/delete-order-item`,
-    pendingBatchesList:   `${BASE_URL}/orders/get-pending-batches-list`,
-    confirmedBatchesList: `${BASE_URL}/orders/get-confirmed-batches-list`,
     createOrderBatch:     `${BASE_URL}/orders/create-order-batch`,
+    getOrderBatch:        `${BASE_URL}/orders/get-order-batch`,
+    updateOrderBatch:     `${BASE_URL}/orders/update-order-batch`,
+    deleteOrderBatch:     `${BASE_URL}/orders/delete-order-batch`,
     createPendingBatch:   `${BASE_URL}/orders/create-pending-batch`,
+    pendingBatchesList:   `${BASE_URL}/orders/get-pending-batches-list`,
+    updatePendingBatch:   `${BASE_URL}/orders/update-pending-batch`,
+    deletePendingBatch:   `${BASE_URL}/orders/delete-pending-batch`,
     createConfirmedBatch: `${BASE_URL}/orders/create-confirmed-batch`,
+    confirmedBatchesList: `${BASE_URL}/orders/get-confirmed-batches-list`,
+    deleteConfirmedBatch: `${BASE_URL}/orders/delete-confirmed-batch`,
     exportBatch:          `${BASE_URL}/orders/export`
 }
 
 export const authApi = {
-    register: `${BASE_URL}/auth/register`,
+    register:        `${BASE_URL}/auth/register`,
     authenticate:    `${BASE_URL}/auth/authenticate`,
-    me:       `${BASE_URL}/auth/me`,
-    logout:   `${BASE_URL}/auth/logout`
+    me:              `${BASE_URL}/auth/me`,
+    logout:          `${BASE_URL}/auth/logout`
 }
 
 // ── Generic AJAX Wrapper ──────────────────────────────────────────────────
